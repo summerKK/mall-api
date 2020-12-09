@@ -1,0 +1,32 @@
+Database:
+  DBType: mysql
+  Username: root
+  Password: root
+  Host: 127.0.0.1:3306
+  DBName: mall
+  TablePrefix:
+  Charset: utf8mb4,utf8
+  ParseTime: True
+  # 最大空闲连接(当大于该值的时候会从连接池释放)
+  MaxIdleConns: 10
+  # 最大连接数
+  MaxOpenConns: 30
+
+Server:
+  # debug/prod 模式
+  RunModel: debug
+  HttpPort: 2020
+  ProjectName: admin
+
+App:
+  # 列表最大返回数据
+  MaxPageSize: 50
+  # 默认分页大小
+  DefaultPageSize: 20
+  # 是否允许下载
+  AllowDownload: true
+
+JWT:
+  Secret: summer
+  Issuer: koel-api
+  Expire: 7200
