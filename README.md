@@ -14,5 +14,5 @@
     - [x] POST /admin/login
     - [x] POST /admin/register
     - [x] GET /admin/:id
-    - [x] POST /delete/:id
+    - [x] POST /admin/delete/:id
 
