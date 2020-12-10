@@ -1,5 +1,3 @@
-
-
 - 仿照 `macro` 大佬的 `mall` 商城.用Go重写api.不知道能不能实现.干就完事了.
 
 # 项目地址
@@ -16,4 +14,5 @@
     - [x] POST /admin/login
     - [x] POST /admin/register
     - [x] GET /admin/:id
+    - [x] POST /delete/:id
 
