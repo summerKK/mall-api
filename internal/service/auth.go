@@ -2,6 +2,8 @@ package service
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/summerKK/go-code-snippet-library/koel-api/global"
+	"github.com/summerKK/go-code-snippet-library/koel-api/internal/dao"
 	"github.com/summerKK/go-code-snippet-library/koel-api/internal/dto/admin"
 	"github.com/summerKK/go-code-snippet-library/koel-api/internal/model"
 	businessError "github.com/summerKK/go-code-snippet-library/koel-api/pkg/error"
@@ -10,19 +12,24 @@ import (
 )
 
 type AdminService struct {
-	*service
+	service *service
+	dao     *dao.AuthDao
 }
 
 func NewAdminService(ctx *gin.Context) *AdminService {
 	svc := NewService(ctx)
 	return &AdminService{
 		service: svc,
+		dao:     dao.NewAuth(global.DBEngine),
 	}
 }
 
 // 用户登录
-func (s *AdminService) Login(param *admin.UserLoginRequest) error {
-	var err error
+func (s *AdminService) Login(param *admin.UserLoginRequest) (err error) {
+	defer func() {
+		util.AddErrorToCtx(s.service.ctx, err)
+	}()
+
 	user, err := s.dao.GetItemByName(param.UserName)
 	if err != nil {
 		return err
@@ -38,7 +45,7 @@ func (s *AdminService) Login(param *admin.UserLoginRequest) error {
 // 用户注册
 func (s *AdminService) Register(param *admin.UserRegisterRequest) (user *model.UmsAdmin, err error) {
 	defer func() {
-		util.AddErrorToCtx(s.ctx, err)
+		util.AddErrorToCtx(s.service.ctx, err)
 	}()
 
 	user = param.Convert2Model()
@@ -68,5 +75,24 @@ func (s *AdminService) Register(param *admin.UserRegisterRequest) (user *model.U
 
 // 获取指定用户信息
 func (s *AdminService) GetItem(userId int) (user *model.UmsAdmin, err error) {
-	return s.dao.GetItemById(userId)
+	defer func() {
+		util.AddErrorToCtx(s.service.ctx, err)
+	}()
+
+	err = s.dao.GetItemById(userId, user)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
+// 删除用户
+func (s *AdminService) DeleteItem(userId int) (err error) {
+	defer func() {
+		util.AddErrorToCtx(s.service.ctx, err)
+	}()
+
+	err = s.dao.DeleteItemById(userId)
+
+	return
 }

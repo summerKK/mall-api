@@ -2,8 +2,9 @@ package middleware
 
 import (
 	"bytes"
-	"log"
+	"time"
 
+	"github.com/fatih/color"
 	"github.com/gin-gonic/gin"
 	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/util"
 )
@@ -28,7 +29,7 @@ func CollectError() gin.HandlerFunc {
 					buf.WriteByte('\n')
 				}
 
-				log.Printf("-------------\n%s-------------", buf.String())
+				color.Yellow("[%s]\n-------------\n%s-------------", time.Now().Format("2006-01-02 15:04:05"), buf.String())
 			}
 		}
 	}

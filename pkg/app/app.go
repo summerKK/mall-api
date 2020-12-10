@@ -31,7 +31,7 @@ func (r *Response) Success(data interface{}) {
 	r.ToResponse(data, error.Success)
 }
 
-func (r *Response) ToErrorResponse(err *error.Error) {
+func (r *Response) Fail(err *error.Error) {
 	r.ToResponse(nil, err)
 }
 

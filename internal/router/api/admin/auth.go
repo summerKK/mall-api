@@ -19,20 +19,20 @@ func (_ umsAdminController) Login(c *gin.Context) {
 	response := app.NewResponse(c)
 	ok, errors := app.BindAndValid(c, params)
 	if !ok {
-		response.ToErrorResponse(error.InvalidParams.WithDetails(errors.Errors()...))
+		response.Fail(error.InvalidParams.WithDetails(errors.Errors()...))
 		return
 	}
 
 	svc := service.NewAdminService(c)
 	err := svc.Login(params)
 	if err != nil {
-		response.ToErrorResponse(error.UnauthorizedAuthNotExist)
+		response.Fail(error.UnauthorizedAuthNotExist)
 		return
 	}
 
 	token, err := app.GenerateToken(params.UserName)
 	if err != nil {
-		response.ToErrorResponse(error.UnauthorizedTokenGenerate)
+		response.Fail(error.UnauthorizedTokenGenerate)
 		return
 	}
 
@@ -47,14 +47,14 @@ func (_ umsAdminController) Register(c *gin.Context) {
 	response := app.NewResponse(c)
 	ok, errors := app.BindAndValid(c, params)
 	if !ok {
-		response.ToErrorResponse(error.InvalidParams.WithDetails(errors.Errors()...))
+		response.Fail(error.InvalidParams.WithDetails(errors.Errors()...))
 		return
 	}
 
 	svc := service.NewAdminService(c)
 	user, err := svc.Register(params)
 	if err != nil {
-		response.ToErrorResponse(error.NewErrWithBusinessError(err))
+		response.Fail(error.NewErrWithBusinessError(err))
 		return
 	}
 
@@ -67,7 +67,7 @@ func (_ umsAdminController) GetItem(c *gin.Context) {
 	userId := convert.StrTo(p).MustInt()
 	response := app.NewResponse(c)
 	if userId == 0 {
-		response.ToErrorResponse(error.InvalidParams)
+		response.Fail(error.InvalidParams)
 		return
 	}
 
@@ -75,4 +75,24 @@ func (_ umsAdminController) GetItem(c *gin.Context) {
 	user, _ := svc.GetItem(userId)
 
 	response.Success(user)
+}
+
+// 删除用户
+func (_ umsAdminController) DeleteItem(c *gin.Context) {
+	p := c.Param("id")
+	userId := convert.StrTo(p).MustInt()
+	response := app.NewResponse(c)
+	if userId == 0 {
+		response.Fail(error.InvalidParams)
+		return
+	}
+
+	svc := service.NewAdminService(c)
+	err := svc.DeleteItem(userId)
+	if err != nil {
+		response.Fail(error.OperationFailure)
+		return
+	}
+
+	response.Success(nil)
 }

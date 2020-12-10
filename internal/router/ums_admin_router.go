@@ -12,6 +12,9 @@ func umsAdminRoute(r *gin.RouterGroup) {
 	r1.POST("/login", admin.UmsAdminController.Login)
 	r1.POST("/register", admin.UmsAdminController.Register)
 
-	r2 := r1.Use(middleware.AuthAdmin())
-	r2.GET("/:id", admin.UmsAdminController.GetItem)
+	{
+		r2 := r1.Use(middleware.AuthAdmin())
+		r2.GET("/:id", admin.UmsAdminController.GetItem)
+		r2.POST("/delete/:id", admin.UmsAdminController.DeleteItem)
+	}
 }

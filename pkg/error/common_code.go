@@ -9,4 +9,5 @@ var (
 	UnauthorizedTokenTimeout  = NewError(401, "鉴权失败,Token超时").WithHttpCode(http.StatusUnauthorized)
 	UnauthorizedTokenGenerate = NewError(401, "鉴权失败,Token生成失败").WithHttpCode(http.StatusUnauthorized)
 	InvalidParams             = NewError(400, "入参错误")
+	OperationFailure          = NewError(400, "操作失败")
 )

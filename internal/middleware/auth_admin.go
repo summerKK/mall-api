@@ -14,7 +14,7 @@ func AuthAdmin() gin.HandlerFunc {
 		bearToken := c.GetHeader("Authorization")
 		response := app.NewResponse(c)
 		if bearToken == "" {
-			response.ToErrorResponse(errorCode.UnauthorizedTokenError)
+			response.Fail(errorCode.UnauthorizedTokenError)
 			c.Abort()
 			return
 		}
@@ -23,7 +23,7 @@ func AuthAdmin() gin.HandlerFunc {
 		_, err := app.ParseToken(bearToken)
 		if err != nil {
 			util.AddErrorToCtx(c, err)
-			response.ToErrorResponse(errorCode.UnauthorizedTokenError)
+			response.Fail(errorCode.UnauthorizedTokenError)
 			c.Abort()
 			return
 		}
