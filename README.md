@@ -13,6 +13,7 @@
 # 已经实现的接口
 
 - 后台用户管理
-    - [x] /admin/login
-    - [x] /admin/register
+    - [x] POST /admin/login
+    - [x] POST /admin/register
+    - [x] GET /admin/:id
 

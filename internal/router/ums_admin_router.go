@@ -8,6 +8,7 @@ import (
 func umsAdminRoute(r *gin.RouterGroup) {
 	group := r.Group("/admin")
 
+	group.GET("/:id", admin.UmsAdminController.GetItem)
 	group.POST("/login", admin.UmsAdminController.Login)
 	group.POST("/register", admin.UmsAdminController.Register)
 }

@@ -1,8 +1,6 @@
 package service
 
 import (
-	"errors"
-
 	"github.com/gin-gonic/gin"
 	"github.com/summerKK/go-code-snippet-library/koel-api/internal/dto/admin"
 	"github.com/summerKK/go-code-snippet-library/koel-api/internal/model"
@@ -24,7 +22,7 @@ func NewAdminService(ctx *gin.Context) *AdminService {
 
 func (s *AdminService) CheckAuth(param *admin.UserLoginRequest) error {
 	var err error
-	user, err := s.dao.GetUserByName(param.UserName)
+	user, err := s.dao.GetItemByName(param.UserName)
 	if err != nil {
 		return err
 	}
@@ -33,7 +31,7 @@ func (s *AdminService) CheckAuth(param *admin.UserLoginRequest) error {
 		return nil
 	}
 
-	return errors.New("check auth failed.")
+	return businessError.NewBusinessError("check auth failed")
 }
 
 func (s *AdminService) Register(param *admin.UserRegisterRequest) (user *model.UmsAdmin, err error) {
@@ -43,7 +41,7 @@ func (s *AdminService) Register(param *admin.UserRegisterRequest) (user *model.U
 
 	user = param.Convert2Model()
 	// 查看用户是否已经存在
-	existsUser, err := s.dao.GetUserByName(user.Username)
+	existsUser, err := s.dao.GetItemByName(user.Username)
 	if err != nil {
 		return
 	}
@@ -64,4 +62,8 @@ func (s *AdminService) Register(param *admin.UserRegisterRequest) (user *model.U
 	}
 
 	return
+}
+
+func (s *AdminService) GetItem(userId int) (user *model.UmsAdmin, err error) {
+	return s.dao.GetItemById(userId)
 }
