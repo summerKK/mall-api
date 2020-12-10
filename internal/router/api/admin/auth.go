@@ -24,7 +24,7 @@ func (_ umsAdminController) Login(c *gin.Context) {
 	}
 
 	svc := service.NewAdminService(c)
-	err := svc.CheckAuth(params)
+	err := svc.Login(params)
 	if err != nil {
 		response.ToErrorResponse(error.UnauthorizedAuthNotExist)
 		return

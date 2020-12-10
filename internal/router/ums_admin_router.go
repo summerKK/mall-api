@@ -2,13 +2,16 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/summerKK/go-code-snippet-library/koel-api/internal/middleware"
 	"github.com/summerKK/go-code-snippet-library/koel-api/internal/router/api/admin"
 )
 
 func umsAdminRoute(r *gin.RouterGroup) {
-	group := r.Group("/admin")
+	r1 := r.Group("/admin")
 
-	group.GET("/:id", admin.UmsAdminController.GetItem)
-	group.POST("/login", admin.UmsAdminController.Login)
-	group.POST("/register", admin.UmsAdminController.Register)
+	r1.POST("/login", admin.UmsAdminController.Login)
+	r1.POST("/register", admin.UmsAdminController.Register)
+
+	r2 := r1.Use(middleware.AuthAdmin())
+	r2.GET("/:id", admin.UmsAdminController.GetItem)
 }

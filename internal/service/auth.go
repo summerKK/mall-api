@@ -20,7 +20,8 @@ func NewAdminService(ctx *gin.Context) *AdminService {
 	}
 }
 
-func (s *AdminService) CheckAuth(param *admin.UserLoginRequest) error {
+// 用户登录
+func (s *AdminService) Login(param *admin.UserLoginRequest) error {
 	var err error
 	user, err := s.dao.GetItemByName(param.UserName)
 	if err != nil {
@@ -34,6 +35,7 @@ func (s *AdminService) CheckAuth(param *admin.UserLoginRequest) error {
 	return businessError.NewBusinessError("check auth failed")
 }
 
+// 用户注册
 func (s *AdminService) Register(param *admin.UserRegisterRequest) (user *model.UmsAdmin, err error) {
 	defer func() {
 		util.AddErrorToCtx(s.ctx, err)
@@ -64,6 +66,7 @@ func (s *AdminService) Register(param *admin.UserRegisterRequest) (user *model.U
 	return
 }
 
+// 获取指定用户信息
 func (s *AdminService) GetItem(userId int) (user *model.UmsAdmin, err error) {
 	return s.dao.GetItemById(userId)
 }
