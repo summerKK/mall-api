@@ -12,7 +12,7 @@ const (
 )
 
 type UmsAdmin struct {
-	Id         uint      `json:"id" gorm:"primaryKey"`
+	ID
 	Username   string    `json:"username"`
 	Password   string    `json:"-"`
 	Icon       string    `json:"icon"`
@@ -31,11 +31,6 @@ func (a *UmsAdmin) TableName() string {
 
 func (a *UmsAdmin) BeforeCreate(tx *gorm.DB) (err error) {
 	a.CreateTime = LocalTime{time.Now()}
-
-	return nil
-}
-
-func (a *UmsAdmin) AfterFind(tx *gorm.DB) (err error) {
 
 	return nil
 }

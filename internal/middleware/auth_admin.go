@@ -4,9 +4,9 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/app"
-	errorCode "github.com/summerKK/go-code-snippet-library/koel-api/pkg/error"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/util"
+	"github.com/summerKK/mall-api/pkg/app"
+	errorCode "github.com/summerKK/mall-api/pkg/error"
+	"github.com/summerKK/mall-api/pkg/util"
 )
 
 func AuthAdmin() gin.HandlerFunc {

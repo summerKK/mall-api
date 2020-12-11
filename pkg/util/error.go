@@ -2,8 +2,8 @@ package util
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/summerKK/go-code-snippet-library/koel-api/global"
-	businessError "github.com/summerKK/go-code-snippet-library/koel-api/pkg/error"
+	"github.com/summerKK/mall-api/global"
+	businessError "github.com/summerKK/mall-api/pkg/error"
 )
 
 func AddErrorToCtx(ctx *gin.Context, err error) {

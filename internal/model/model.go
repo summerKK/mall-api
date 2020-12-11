@@ -7,11 +7,15 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-	"github.com/summerKK/go-code-snippet-library/koel-api/global"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/setting"
+	"github.com/summerKK/mall-api/global"
+	"github.com/summerKK/mall-api/pkg/setting"
 )
 
 var zeroTime = time.Time{}
+
+type ID struct {
+	Id uint `json:"id" gorm:"primaryKey"`
+}
 
 // 数据库时间格式化问题
 type LocalTime struct {

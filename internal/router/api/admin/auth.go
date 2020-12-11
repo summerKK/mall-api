@@ -2,11 +2,11 @@ package admin
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/summerKK/go-code-snippet-library/koel-api/internal/dto/admin"
-	"github.com/summerKK/go-code-snippet-library/koel-api/internal/service"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/app"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/convert"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/error"
+	"github.com/summerKK/mall-api/internal/dto/admin"
+	"github.com/summerKK/mall-api/internal/service"
+	"github.com/summerKK/mall-api/pkg/app"
+	"github.com/summerKK/mall-api/pkg/convert"
+	"github.com/summerKK/mall-api/pkg/error"
 )
 
 type umsAdminController struct{}

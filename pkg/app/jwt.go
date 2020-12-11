@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/summerKK/go-code-snippet-library/koel-api/global"
+	"github.com/summerKK/mall-api/global"
 )
 
 // jwt token 验证实现

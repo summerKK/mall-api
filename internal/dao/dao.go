@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/jinzhu/gorm"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/util"
+	"github.com/summerKK/mall-api/pkg/util"
 )
 
 type Dao struct {

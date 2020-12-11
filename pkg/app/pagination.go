@@ -2,8 +2,8 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/summerKK/go-code-snippet-library/koel-api/global"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/convert"
+	"github.com/summerKK/mall-api/global"
+	"github.com/summerKK/mall-api/pkg/convert"
 )
 
 func GetPage(c *gin.Context) int {

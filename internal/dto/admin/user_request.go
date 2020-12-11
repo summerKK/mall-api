@@ -1,6 +1,6 @@
 package admin
 
-import "github.com/summerKK/go-code-snippet-library/koel-api/internal/model"
+import "github.com/summerKK/mall-api/internal/model"
 
 type UserLoginRequest struct {
 	UserName string `form:"username" json:"username" binding:"required"`

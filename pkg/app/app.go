@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/error"
+	"github.com/summerKK/mall-api/pkg/error"
 )
 
 type Response struct {

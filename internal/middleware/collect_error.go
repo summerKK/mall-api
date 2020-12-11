@@ -6,7 +6,7 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/gin-gonic/gin"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/util"
+	"github.com/summerKK/mall-api/pkg/util"
 )
 
 //  收集运行时的错误日志并打印

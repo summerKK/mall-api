@@ -2,7 +2,7 @@ package dao
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/summerKK/go-code-snippet-library/koel-api/internal/model"
+	"github.com/summerKK/mall-api/internal/model"
 )
 
 type AuthDao struct {

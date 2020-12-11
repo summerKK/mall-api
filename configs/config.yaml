@@ -28,5 +28,5 @@ App:
 
 JWT:
   Secret: summer
-  Issuer: koel-api
+  Issuer: mall-api
   Expire: 7200

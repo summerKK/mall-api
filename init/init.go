@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/summerKK/go-code-snippet-library/koel-api/global"
-	"github.com/summerKK/go-code-snippet-library/koel-api/internal/model"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/setting"
+	"github.com/summerKK/mall-api/global"
+	"github.com/summerKK/mall-api/internal/model"
+	"github.com/summerKK/mall-api/pkg/setting"
 )
 
 var (

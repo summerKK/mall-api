@@ -3,9 +3,9 @@ package main
 import (
 	"net/http"
 
-	"github.com/summerKK/go-code-snippet-library/koel-api/global"
-	boot "github.com/summerKK/go-code-snippet-library/koel-api/init"
-	"github.com/summerKK/go-code-snippet-library/koel-api/internal/router"
+	"github.com/summerKK/mall-api/global"
+	boot "github.com/summerKK/mall-api/init"
+	"github.com/summerKK/mall-api/internal/router"
 )
 
 func init() {

@@ -2,13 +2,13 @@ package service
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/summerKK/go-code-snippet-library/koel-api/global"
-	"github.com/summerKK/go-code-snippet-library/koel-api/internal/dao"
-	"github.com/summerKK/go-code-snippet-library/koel-api/internal/dto/admin"
-	"github.com/summerKK/go-code-snippet-library/koel-api/internal/model"
-	businessError "github.com/summerKK/go-code-snippet-library/koel-api/pkg/error"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/security"
-	"github.com/summerKK/go-code-snippet-library/koel-api/pkg/util"
+	"github.com/summerKK/mall-api/global"
+	"github.com/summerKK/mall-api/internal/dao"
+	"github.com/summerKK/mall-api/internal/dto/admin"
+	"github.com/summerKK/mall-api/internal/model"
+	businessError "github.com/summerKK/mall-api/pkg/error"
+	"github.com/summerKK/mall-api/pkg/security"
+	"github.com/summerKK/mall-api/pkg/util"
 )
 
 type AdminService struct {
