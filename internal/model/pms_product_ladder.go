@@ -1,14 +1,14 @@
 package model
 
-import "math/big"
+import "github.com/shopspring/decimal"
 
 // 商品阶梯价格设置
 type PmsProductLadder struct {
 	ID
-	ProductId uint      `json:"productId"`
-	Count     uint      `json:"count"`
-	Discount  big.Float `json:"discount"`
-	Price     big.Float `json:"price"`
+	ProductId uint            `json:"productId"`
+	Count     uint            `json:"count"`
+	Discount  decimal.Decimal `json:"discount"`
+	Price     decimal.Decimal `json:"price"`
 }
 
 func (a *PmsProductLadder) TableName() string {

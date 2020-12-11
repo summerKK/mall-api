@@ -29,4 +29,4 @@ App:
 JWT:
   Secret: summer
   Issuer: mall-api
-  Expire: 7200
+  Expire: 31536000

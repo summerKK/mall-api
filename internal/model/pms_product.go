@@ -1,6 +1,6 @@
 package model
 
-import "math/big"
+import "github.com/shopspring/decimal"
 
 type PmsProduct struct {
 	ID
@@ -27,9 +27,9 @@ type PmsProduct struct {
 	// 销量
 	Sale uint `json:"sale"`
 	// 价格
-	Price big.Float `json:"price"`
+	Price decimal.Decimal `json:"price"`
 	// 促销价格
-	PromotionPrice big.Float `json:"promotionPrice"`
+	PromotionPrice decimal.Decimal `json:"promotionPrice"`
 	// 赠送的成长值
 	GiftGrowth uint `json:"giftGrowth"`
 	// 赠送的积分
@@ -39,7 +39,7 @@ type PmsProduct struct {
 	// 副标题
 	SubTitle string `json:"subTitle"`
 	// 市场价
-	OriginalPrice big.Float `json:"originalPrice"`
+	OriginalPrice decimal.Decimal `json:"originalPrice"`
 	// 库存
 	Stock uint `json:"stock"`
 	// 库存预警值
@@ -47,7 +47,7 @@ type PmsProduct struct {
 	// 单位
 	Unit string `json:"unit"`
 	// 商品重量，默认为克
-	Weight big.Float `json:"weight"`
+	Weight decimal.Decimal `json:"weight"`
 	// 是否为预告商品：0->不是；1->是
 	PreviewStatus uint8 `json:"previewStatus"`
 	// 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮

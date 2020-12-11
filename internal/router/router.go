@@ -10,11 +10,11 @@ func NewRouter() *gin.Engine {
 
 	r.Use(middleware.Translations(), middleware.CollectError())
 
+	r1 := r.Group("/api")
 	// 公共接口
-	publicRouter(r)
+	publicRouter(r1)
 
 	{
-		r1 := r.Group("/api")
 		r1.Use(middleware.AuthAdmin())
 		// 后台用户管理
 		umsAdminRouter(r1)

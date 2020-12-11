@@ -5,7 +5,7 @@ import (
 	"github.com/summerKK/mall-api/internal/router/api/admin"
 )
 
-func publicRouter(r *gin.Engine) {
+func publicRouter(r *gin.RouterGroup) {
 	{
 		r1 := r.Group("/admin")
 		r1.POST("/login", admin.UmsAdminController.Login)
