@@ -11,8 +11,11 @@
 # 已经实现的接口
 
 - 后台用户管理
-    - [x] POST /admin/login
-    - [x] POST /admin/register
-    - [x] GET /admin/:id
-    - [x] POST /admin/delete/:id
+    - [x] POST /api/admin/login
+    - [x] POST /api/admin/register
+    - [x] GET /api/admin/:id
+    - [x] POST /api/admin/delete/:id
+  
+- 商品管理
+    - [x] POST /api/product/create
 
