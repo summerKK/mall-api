@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/jinzhu/gorm"
 	"github.com/summerKK/mall-api/pkg/util"
+	"gorm.io/gorm"
 )
 
 type Dao struct {
@@ -46,4 +46,21 @@ func (d *Dao) GetItemByColumns(columns map[string]interface{}, model interface{}
 	}
 
 	return nil
+}
+
+func (d *Dao) Insert(model interface{}) error {
+	// 判断model 是否是指针类型 / 或者 []*ptr
+	if !util.IsStructPtr(model) && !util.IsSliceElemPtr(model) {
+		panic("model 只能为指针类型的结构体")
+	}
+
+	return d.db.Create(model).Error
+}
+
+func (d *Dao) GetDb() *gorm.DB {
+	return d.db
+}
+
+func (d *Dao) SetDb(db *gorm.DB) {
+	d.db = db
 }

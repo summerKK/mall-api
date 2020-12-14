@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
 	"github.com/summerKK/mall-api/global"
 	"github.com/summerKK/mall-api/pkg/setting"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 var zeroTime = time.Time{}
@@ -51,26 +51,28 @@ func (t *LocalTime) Scan(v interface{}) error {
 // 初始化数据库
 func NewDbEngine(dbSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 	format := "%s:%s@tcp(%s)/%s?charset=%s&parseTime=%t&loc=Local"
-	db, err := gorm.Open(dbSetting.DBType, fmt.Sprintf(format,
+	dns := fmt.Sprintf(format,
 		dbSetting.Username,
 		dbSetting.Password,
 		dbSetting.Host,
 		dbSetting.DBName,
 		dbSetting.Charset,
 		dbSetting.ParseTime,
-	))
+	)
+	db, err := gorm.Open(mysql.Open(dns), &gorm.Config{})
 
 	if err != nil {
 		return nil, err
 	}
 
-	if global.ServerSetting.RunModel == "debug" {
-		db.LogMode(true)
+	sqlDb, err := db.DB()
+	if err != nil {
+		panic(err)
 	}
 
 	// 设置连接池最大连接数和空闲数
-	db.DB().SetMaxIdleConns(global.DatabaseSetting.MaxIdleConns)
-	db.DB().SetMaxOpenConns(global.DatabaseSetting.MaxOpenConns)
+	sqlDb.SetMaxIdleConns(global.DatabaseSetting.MaxIdleConns)
+	sqlDb.SetMaxOpenConns(global.DatabaseSetting.MaxOpenConns)
 
 	return db, nil
 }

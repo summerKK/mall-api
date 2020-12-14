@@ -1,6 +1,6 @@
 package dao
 
-import "github.com/jinzhu/gorm"
+import "gorm.io/gorm"
 
 type SkuStockDao struct {
 	*Dao

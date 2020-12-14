@@ -3,6 +3,7 @@ package admin
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/summerKK/mall-api/internal/dto/admin"
+	"github.com/summerKK/mall-api/internal/service"
 	"github.com/summerKK/mall-api/pkg/app"
 	"github.com/summerKK/mall-api/pkg/error"
 )
@@ -20,4 +21,12 @@ func (_ pmsProductController) Create(c *gin.Context) {
 		return
 	}
 
+	svc := service.NewProductService(c)
+	err := svc.Create(productRequest)
+	if err != nil {
+		response.Fail(error.NewErrWithBusinessError(err))
+		return
+	}
+
+	response.Success(nil)
 }

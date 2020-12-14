@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"github.com/jinzhu/gorm"
 	"github.com/summerKK/mall-api/internal/model"
+	"gorm.io/gorm"
 )
 
 type AuthDao struct {

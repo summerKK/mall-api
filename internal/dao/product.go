@@ -1,8 +1,7 @@
 package dao
 
 import (
-	"github.com/jinzhu/gorm"
-	"github.com/summerKK/mall-api/internal/model"
+	"gorm.io/gorm"
 )
 
 type ProductDao struct {
@@ -13,8 +12,4 @@ func NewProduct(db *gorm.DB) *ProductDao {
 	return &ProductDao{
 		NewDao(db),
 	}
-}
-
-func (p *ProductDao) Insert(product *model.PmsProduct) error {
-	return p.db.Create(product).Error
 }

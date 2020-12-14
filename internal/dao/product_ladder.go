@@ -1,6 +1,6 @@
 package dao
 
-import "github.com/jinzhu/gorm"
+import "gorm.io/gorm"
 
 type ProductLadderDao struct {
 	*Dao
