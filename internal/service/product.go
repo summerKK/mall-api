@@ -5,6 +5,7 @@ import (
 	"github.com/summerKK/mall-api/global"
 	"github.com/summerKK/mall-api/internal/dao"
 	"github.com/summerKK/mall-api/internal/dto/admin"
+	"github.com/summerKK/mall-api/internal/model"
 	businessError "github.com/summerKK/mall-api/pkg/error"
 	"github.com/summerKK/mall-api/pkg/util"
 )
@@ -22,7 +23,7 @@ func NewProductService(ctx *gin.Context) *ProductService {
 	}
 }
 
-func (s *ProductService) Create(params *admin.ProductRequest) error {
+func (s *ProductService) Create(params *admin.ProductRequest) (product *model.PmsProduct, err error) {
 
 	// 开启事物
 	db := s.dao.GetDb()
@@ -31,17 +32,17 @@ func (s *ProductService) Create(params *admin.ProductRequest) error {
 	// 使用事物创建商品
 	s.dao.SetDb(tx)
 
-	errorhandler := func(err error) error {
+	errorhandler := func(err error) (*model.PmsProduct, error) {
 		// 事物回滚
 		tx.Rollback()
 
 		util.AddErrorToCtx(s.service.ctx, err)
-		return businessError.NewBusinessError("创建失败")
+		return nil, businessError.NewBusinessError("创建失败")
 	}
 
 	// 商品创建
-	product := params.PmsProduct
-	err := s.dao.Insert(product)
+	product = params.PmsProduct
+	err = s.dao.Insert(product)
 	if err != nil {
 		return errorhandler(err)
 	}
@@ -144,5 +145,9 @@ func (s *ProductService) Create(params *admin.ProductRequest) error {
 	// 提交事物
 	tx.Commit()
 
-	return nil
+	return
+}
+
+func (s *ProductService) Update(params *admin.ProductRequest, productId int) (product *model.PmsProduct, err error) {
+	return
 }

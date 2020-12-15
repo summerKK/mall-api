@@ -9,17 +9,17 @@ import (
 	"github.com/summerKK/mall-api/pkg/error"
 )
 
-type umsAdminController struct{}
+type umsAdminController struct {
+	BaseAdmin
+}
 
-var UmsAdminController = umsAdminController{}
+var UmsAdminController = umsAdminController{BaseAdminController}
 
 // 用户登录
-func (_ umsAdminController) Login(c *gin.Context) {
+func (u umsAdminController) Login(c *gin.Context) {
 	params := &admin.UserLoginRequest{}
-	response := app.NewResponse(c)
-	ok, errors := app.BindAndValid(c, params)
+	ok, response := u.VerifyParams(c, params)
 	if !ok {
-		response.Fail(error.InvalidParams.WithDetails(errors.Errors()...))
 		return
 	}
 
@@ -42,12 +42,10 @@ func (_ umsAdminController) Login(c *gin.Context) {
 }
 
 // 用户注册
-func (_ umsAdminController) Register(c *gin.Context) {
+func (u umsAdminController) Register(c *gin.Context) {
 	params := &admin.UserRegisterRequest{}
-	response := app.NewResponse(c)
-	ok, errors := app.BindAndValid(c, params)
+	ok, response := u.VerifyParams(c, params)
 	if !ok {
-		response.Fail(error.InvalidParams.WithDetails(errors.Errors()...))
 		return
 	}
 
