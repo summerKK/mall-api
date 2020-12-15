@@ -48,5 +48,5 @@ func (p pmsProductController) Update(c *gin.Context) {
 	}
 
 	svc := service.NewProductService(c)
-	svc.Update(productRequest)
+	svc.Update(productRequest, productId)
 }
