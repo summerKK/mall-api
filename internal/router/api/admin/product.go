@@ -48,5 +48,11 @@ func (p pmsProductController) Update(c *gin.Context) {
 	}
 
 	svc := service.NewProductService(c)
-	svc.Update(productRequest, productId)
+	product, err := svc.Update(productRequest, productId)
+	if err != nil {
+		response.Fail(error.NewErrWithBusinessError(err))
+		return
+	}
+
+	response.Success(product)
 }

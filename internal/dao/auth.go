@@ -22,7 +22,7 @@ func (a *AuthDao) Register(user *model.UmsAdmin) error {
 
 func (a *AuthDao) GetItemByName(username string) (*model.UmsAdmin, error) {
 	user := &model.UmsAdmin{}
-	err := a.GetItemByColumns(map[string]interface{}{"username": username}, user)
+	_, err := a.GetItemByColumns(map[string]interface{}{"username": username}, user)
 
 	return user, err
 }
