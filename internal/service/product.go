@@ -97,6 +97,8 @@ func (s *ProductService) Update(params *admin.ProductRequest, productId int) (pr
 	}()
 
 	params.PmsProduct.Id = uint(productId)
+	s.productId = params.PmsProduct.Id
+
 	err = s.dao.Save(params.PmsProduct)
 	if err != nil {
 		return s.errorHandler(err)
@@ -173,6 +175,7 @@ func (s *ProductService) saveMemberPrice(memberPrice []*model.PmsMemberPrice) er
 	if len(memberPrice) > 0 {
 		for _, price := range memberPrice {
 			price.ProductId = s.productId
+			price.Id = 0
 		}
 		memberPriceDao := dao.NewMemberPrice(s.tx)
 
@@ -187,6 +190,7 @@ func (s *ProductService) saveProductLadder(productLadderList []*model.PmsProduct
 	if len(productLadderList) > 0 {
 		for _, ladder := range productLadderList {
 			ladder.ProductId = s.productId
+			ladder.Id = 0
 		}
 		productLadderDao := dao.NewProductLadder(s.tx)
 
@@ -201,6 +205,7 @@ func (s *ProductService) saveProductFullReduction(productFullReductionList []*mo
 	if len(productFullReductionList) > 0 {
 		for _, reduction := range productFullReductionList {
 			reduction.ProductId = s.productId
+			reduction.Id = 0
 		}
 		productFullReductionDao := dao.NewProductFullReduction(s.tx)
 
@@ -215,6 +220,7 @@ func (s *ProductService) saveSkuStock(skuStockList []*model.PmsSkuStock) error {
 	if len(skuStockList) > 0 {
 		for i, stock := range skuStockList {
 			stock.ProductId = s.productId
+			stock.Id = 0
 			// sku 编码
 			if stock.SkuCode == "" {
 				stock.SetDefaultSkuCode(s.productId, i+1)
@@ -233,6 +239,7 @@ func (s *ProductService) saveProductAttributeValue(productAttributeValueList []*
 	if len(productAttributeValueList) > 0 {
 		for _, value := range productAttributeValueList {
 			value.ProductId = s.productId
+			value.Id = 0
 		}
 		productAttributeValueDao := dao.NewProductAttributeValue(s.tx)
 
@@ -247,6 +254,7 @@ func (s *ProductService) saveSubjectProductRelation(subjectProductRelationList [
 	if len(subjectProductRelationList) > 0 {
 		for _, relation := range subjectProductRelationList {
 			relation.ProductId = s.productId
+			relation.Id = 0
 		}
 		subjectProductRelationDao := dao.NewSubjectProductRelation(s.tx)
 
@@ -261,6 +269,7 @@ func (s *ProductService) savePrefrenceAreaProductRelation(prefrenceAreaProductRe
 	if len(prefrenceAreaProductRelationList) > 0 {
 		for _, relation := range prefrenceAreaProductRelationList {
 			relation.ProductId = s.productId
+			relation.Id = 0
 		}
 		prefrenceAreaProductRelationDao := dao.NewPrefrenceAreaProductRelation(s.tx)
 

@@ -15,7 +15,8 @@
     - [x] POST /api/admin/register
     - [x] GET /api/admin/:id
     - [x] POST /api/admin/delete/:id
-  
+
 - 商品管理
     - [x] POST /api/product/create
+    - [x] POST /api/product/update/:id
 
