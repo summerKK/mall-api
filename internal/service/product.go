@@ -1,6 +1,8 @@
 package service
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/summerKK/mall-api/global"
 	"github.com/summerKK/mall-api/internal/dao"
@@ -113,6 +115,27 @@ func (s *ProductService) Update(params *admin.ProductRequest, productId int) (pr
 	tx.Commit()
 
 	product = params.PmsProduct
+
+	return
+}
+
+func (s *ProductService) List(params *admin.ProductListRequest, pageSize int, pageOffset int) (list []*model.PmsProduct, err error) {
+	defer func() {
+		util.AddErrorToCtx(s.service.ctx, err)
+	}()
+
+	product := &model.PmsProduct{
+		PublishStatus:     params.PublishStatus,
+		VerifyStatus:      params.VerifyStatus,
+		ProductSn:         params.ProductSn,
+		BrandId:           params.BrandId,
+		ProductCategoryId: params.ProductCategoryId,
+	}
+	if params.Keyword != "" {
+		product.Name = fmt.Sprintf("%%%s%%", params.Keyword)
+	}
+
+	list, err = s.dao.List(product, pageSize, pageOffset)
 
 	return
 }

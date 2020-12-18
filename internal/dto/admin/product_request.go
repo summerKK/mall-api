@@ -20,3 +20,18 @@ type ProductRequest struct {
 	// 优选专区和商品的关系
 	PrefrenceAreaProductRelationList []*model.CmsPrefrenceAreaProductRelation `form:"prefrenceAreaProductRelationList" json:"prefrenceAreaProductRelationList" binding:"required"`
 }
+
+type ProductListRequest struct {
+	// 上架状态
+	PublishStatus uint8 `form:"publishStatus" json:"publishStatus"`
+	// 审核状态
+	VerifyStatus uint8 `form:"verifyStatus" json:"verifyStatus"`
+	// 商品名称模糊关键字
+	Keyword string `form:"keyword" json:"keyword"`
+	// 商品货号
+	ProductSn string `form:"productSn" json:"productSn"`
+	// 商品分类编号
+	ProductCategoryId uint `form:"productCategoryId" json:"productCategoryId"`
+	// 商品品牌编号
+	BrandId uint `form:"brandId" json:"brandId"`
+}

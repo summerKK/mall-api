@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/summerKK/mall-api/internal/dto/admin"
 	"github.com/summerKK/mall-api/internal/service"
+	"github.com/summerKK/mall-api/pkg/app"
 	"github.com/summerKK/mall-api/pkg/convert"
 	"github.com/summerKK/mall-api/pkg/error"
 )
@@ -55,4 +56,25 @@ func (p pmsProductController) Update(c *gin.Context) {
 	}
 
 	response.Success(product)
+}
+
+func (p pmsProductController) List(c *gin.Context) {
+	productListRequest := &admin.ProductListRequest{}
+	ok, response := p.VerifyParams(c, productListRequest)
+	if !ok {
+		return
+	}
+
+	pageSize := app.GetPageSize(c)
+	pageNum := app.GetPage(c)
+	pageOffset := app.GetPageOffset(pageNum, pageSize)
+
+	svc := service.NewProductService(c)
+	list, err := svc.List(productListRequest, pageSize, pageOffset)
+	if err != nil {
+		response.Fail(error.NewErrWithBusinessError(err))
+		return
+	}
+
+	response.Success(list)
 }

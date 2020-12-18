@@ -31,3 +31,15 @@ func (p *ProductDao) DeleteAdditionalAttr(product *model.PmsProduct) {
 	// 关联优选
 	p.db.Where("product_id", product.Id).Delete(&model.CmsPrefrenceAreaProductRelation{})
 }
+
+func (p *ProductDao) List(product *model.PmsProduct, pageSize int, pageOffset int) (list []*model.PmsProduct, err error) {
+	name := product.Name
+	product.Name = ""
+	db := p.db.Where(product)
+	if name != "" {
+		db = db.Where("name like ?", name)
+	}
+
+	err = db.Limit(pageSize).Offset(pageOffset).Find(&list).Error
+	return
+}

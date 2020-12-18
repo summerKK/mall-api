@@ -65,6 +65,11 @@ func NewDbEngine(dbSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 		return nil, err
 	}
 
+	// 开发者模式,打印SQL
+	if global.ServerSetting.RunModel == "debug" {
+		db = db.Debug()
+	}
+
 	sqlDb, err := db.DB()
 	if err != nil {
 		panic(err)

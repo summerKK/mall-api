@@ -7,7 +7,7 @@ import (
 )
 
 func GetPage(c *gin.Context) int {
-	page := convert.StrTo(c.Query("page")).MustInt()
+	page := convert.StrTo(c.Query("pageNum")).MustInt()
 	if page <= 0 {
 		page = 1
 	}
@@ -16,7 +16,7 @@ func GetPage(c *gin.Context) int {
 }
 
 func GetPageSize(c *gin.Context) int {
-	pageSize := convert.StrTo(c.Query("page_size")).MustInt()
+	pageSize := convert.StrTo(c.Query("pageSize")).MustInt()
 	if pageSize <= 0 {
 		pageSize = global.AppSetting.DefaultPageSize
 	}
