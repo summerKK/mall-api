@@ -40,7 +40,7 @@ func (p *ProductDao) List(product *model.PmsProduct, pageSize int, pageOffset in
 		db.Where("name like ?", name)
 	}
 
-	err = db.Limit(pageSize).Offset(pageOffset).Find(&list).Count(&count).Error
+	err = db.Model(&list).Count(&count).Limit(pageSize).Offset(pageOffset).Find(&list).Error
 
 	return
 }
