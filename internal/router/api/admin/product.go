@@ -93,3 +93,20 @@ func (p pmsProductController) SimpleList(c *gin.Context) {
 
 	response.Success(list)
 }
+
+func (p pmsProductController) BatchDeleteStatus(c *gin.Context) {
+	params := &admin.ProductBatchDeleteStatusRequest{}
+	ok, response := p.VerifyParams(c, params)
+	if !ok {
+		return
+	}
+
+	svc := service.NewProductService(c)
+	err := svc.BatchDeleteStatus(params)
+	if err != nil {
+		response.Fail(error.NewErrWithBusinessError(err))
+		return
+	}
+
+	response.Success(nil)
+}

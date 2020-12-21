@@ -35,3 +35,8 @@ type ProductListRequest struct {
 	// 商品品牌编号
 	BrandId uint `form:"brandId" json:"brandId"`
 }
+
+type ProductBatchDeleteStatusRequest struct {
+	Ids          []uint `form:"ids" binding:"required"`
+	DeleteStatus uint8  `form:"deleteStatus" binding:"required,oneof=0 1"`
+}

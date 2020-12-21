@@ -155,6 +155,10 @@ func (s *ProductService) SimpleList(keyword string) (list []*model.PmsProduct, e
 	return
 }
 
+func (s *ProductService) BatchDeleteStatus(params *admin.ProductBatchDeleteStatusRequest) error {
+	return s.dao.BatchDeleteStatus(params.Ids, params.DeleteStatus)
+}
+
 func (s *ProductService) saveAdditionalAttr(params *admin.ProductRequest) (err error) {
 	// 会员价格
 	memberPrice := params.MemberPriceList
