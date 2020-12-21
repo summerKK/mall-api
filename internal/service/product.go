@@ -140,6 +140,21 @@ func (s *ProductService) List(params *admin.ProductListRequest, pageSize int, pa
 	return
 }
 
+func (s *ProductService) SimpleList(keyword string) (list []*model.PmsProduct, err error) {
+	defer func() {
+		util.AddErrorToCtx(s.service.ctx, err)
+	}()
+
+	product := &model.PmsProduct{}
+	if keyword != "" {
+		product.Name = fmt.Sprintf("%%%s%%", keyword)
+	}
+
+	list, err = s.dao.SimpleList(product)
+
+	return
+}
+
 func (s *ProductService) saveAdditionalAttr(params *admin.ProductRequest) (err error) {
 	// 会员价格
 	memberPrice := params.MemberPriceList

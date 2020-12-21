@@ -2,6 +2,11 @@ package model
 
 import "github.com/shopspring/decimal"
 
+const (
+	PmsProductDeleteStatusUnDel = 0
+	PmsProductDeleteStatusDel   = 1
+)
+
 type PmsProduct struct {
 	ID
 	BrandId                    uint   `form:"brandId" json:"brandId" binding:"required"`

@@ -40,7 +40,20 @@ func (p *ProductDao) List(product *model.PmsProduct, pageSize int, pageOffset in
 		db.Where("name like ?", name)
 	}
 
-	err = db.Model(&list).Count(&count).Limit(pageSize).Offset(pageOffset).Find(&list).Error
+	err = db.Model(&product).Count(&count).Limit(pageSize).Offset(pageOffset).Find(&list).Error
+
+	return
+}
+
+func (p *ProductDao) SimpleList(product *model.PmsProduct) (list []*model.PmsProduct, err error) {
+	name := product.Name
+	product.Name = ""
+	db := p.db.Where(product)
+	if name != "" {
+		db.Where("delete_status = ? and name like ?", model.PmsProductDeleteStatusUnDel, name)
+	}
+
+	err = db.Find(&list).Error
 
 	return
 }

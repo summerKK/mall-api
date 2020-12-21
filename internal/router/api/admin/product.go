@@ -78,3 +78,18 @@ func (p pmsProductController) List(c *gin.Context) {
 
 	response.SuccessWithPage(list, int(count), pageNum, pageSize)
 }
+
+// 根据商品名称或货号模糊查询
+func (p pmsProductController) SimpleList(c *gin.Context) {
+	keyword := c.Query("keyword")
+	response := app.NewResponse(c)
+
+	svc := service.NewProductService(c)
+	list, err := svc.SimpleList(keyword)
+	if err != nil {
+		response.Fail(error.NewErrWithBusinessError(err))
+		return
+	}
+
+	response.Success(list)
+}
