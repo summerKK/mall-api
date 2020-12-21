@@ -119,7 +119,7 @@ func (s *ProductService) Update(params *admin.ProductRequest, productId int) (pr
 	return
 }
 
-func (s *ProductService) List(params *admin.ProductListRequest, pageSize int, pageOffset int) (list []*model.PmsProduct, err error) {
+func (s *ProductService) List(params *admin.ProductListRequest, pageSize int, pageOffset int) (list []*model.PmsProduct, count int64, err error) {
 	defer func() {
 		util.AddErrorToCtx(s.service.ctx, err)
 	}()
@@ -135,7 +135,7 @@ func (s *ProductService) List(params *admin.ProductListRequest, pageSize int, pa
 		product.Name = fmt.Sprintf("%%%s%%", params.Keyword)
 	}
 
-	list, err = s.dao.List(product, pageSize, pageOffset)
+	list, count, err = s.dao.List(product, pageSize, pageOffset)
 
 	return
 }

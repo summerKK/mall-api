@@ -1,6 +1,8 @@
 package app
 
 import (
+	"math"
+
 	"github.com/gin-gonic/gin"
 	"github.com/summerKK/mall-api/pkg/error"
 )
@@ -35,8 +37,14 @@ func (r *Response) Fail(err *error.Error) {
 	r.ToResponse(nil, err)
 }
 
-type Pagination struct {
-	Page      int `json:"page"`
-	PageSize  int `json:"page_size"`
-	TotalRows int `json:"total_rows"`
+func (r *Response) SuccessWithPage(data interface{}, count, pageNum, pageSize int) {
+	h := gin.H{
+		"list":      data,
+		"pageNum":   pageNum,
+		"pageSize":  pageSize,
+		"total":     count,
+		"totalPage": math.Ceil(float64(count / pageSize)),
+	}
+
+	r.Success(h)
 }

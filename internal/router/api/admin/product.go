@@ -70,11 +70,11 @@ func (p pmsProductController) List(c *gin.Context) {
 	pageOffset := app.GetPageOffset(pageNum, pageSize)
 
 	svc := service.NewProductService(c)
-	list, err := svc.List(productListRequest, pageSize, pageOffset)
+	list, count, err := svc.List(productListRequest, pageSize, pageOffset)
 	if err != nil {
 		response.Fail(error.NewErrWithBusinessError(err))
 		return
 	}
 
-	response.Success(list)
+	response.SuccessWithPage(list, int(count), pageNum, pageSize)
 }

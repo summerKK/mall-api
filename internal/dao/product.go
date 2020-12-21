@@ -32,14 +32,15 @@ func (p *ProductDao) DeleteAdditionalAttr(product *model.PmsProduct) {
 	p.db.Where("product_id", product.Id).Delete(&model.CmsPrefrenceAreaProductRelation{})
 }
 
-func (p *ProductDao) List(product *model.PmsProduct, pageSize int, pageOffset int) (list []*model.PmsProduct, err error) {
+func (p *ProductDao) List(product *model.PmsProduct, pageSize int, pageOffset int) (list []*model.PmsProduct, count int64, err error) {
 	name := product.Name
 	product.Name = ""
 	db := p.db.Where(product)
 	if name != "" {
-		db = db.Where("name like ?", name)
+		db.Where("name like ?", name)
 	}
 
-	err = db.Limit(pageSize).Offset(pageOffset).Find(&list).Error
+	err = db.Limit(pageSize).Offset(pageOffset).Find(&list).Count(&count).Error
+
 	return
 }
