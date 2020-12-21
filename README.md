@@ -21,4 +21,5 @@
     - [x] POST /api/product/update/:id
     - [x] GET /api/product/list
     - [x] GET /api/product/simpleList
+    - [x] GET /api/product/batchUpdate/deleteStatus -> /api/product/update/deleteStatus 
 
