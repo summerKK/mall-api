@@ -155,8 +155,12 @@ func (s *ProductService) SimpleList(keyword string) (list []*model.PmsProduct, e
 	return
 }
 
-func (s *ProductService) BatchDeleteStatus(params *admin.ProductBatchDeleteStatusRequest) error {
-	return s.dao.BatchDeleteStatus(params.Ids, params.DeleteStatus)
+func (s *ProductService) BatchSetDeleteStatus(params *admin.ProductBatchDeleteStatusRequest) error {
+	return s.dao.BatchSetDeleteStatus(params.Ids, params.DeleteStatus)
+}
+
+func (s *ProductService) BatchSetNewStatus(params *admin.ProductBatchSetNewStatusRequest) error {
+	return s.dao.BatchSetNewStatus(params.Ids, params.NewStatus)
 }
 
 func (s *ProductService) saveAdditionalAttr(params *admin.ProductRequest) (err error) {

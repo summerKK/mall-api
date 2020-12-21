@@ -11,5 +11,6 @@ func pmsProductRouter(r *gin.RouterGroup) {
 	r1.POST("/update/:id", admin.PmsProductController.Update)
 	r1.GET("/list", admin.PmsProductController.List)
 	r1.GET("/simpleList", admin.PmsProductController.SimpleList)
-	r1.POST("/batchUpdate/deleteStatus", admin.PmsProductController.BatchDeleteStatus)
+	r1.POST("/batchUpdate/deleteStatus", admin.PmsProductController.BatchSetDeleteStatus)
+	r1.POST("/batchUpdate/newStatus", admin.PmsProductController.BatchSetNewStatus)
 }

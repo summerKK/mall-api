@@ -40,3 +40,8 @@ type ProductBatchDeleteStatusRequest struct {
 	Ids          []uint `form:"ids" binding:"required"`
 	DeleteStatus uint8  `form:"deleteStatus" binding:"required,oneof=0 1"`
 }
+
+type ProductBatchSetNewStatusRequest struct {
+	Ids       []uint `form:"ids" binding:"required"`
+	NewStatus uint8  `form:"newStatus" binding:"required,oneof=0 1"`
+}

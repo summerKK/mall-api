@@ -94,7 +94,8 @@ func (p pmsProductController) SimpleList(c *gin.Context) {
 	response.Success(list)
 }
 
-func (p pmsProductController) BatchDeleteStatus(c *gin.Context) {
+// 批量修改删除状态
+func (p pmsProductController) BatchSetDeleteStatus(c *gin.Context) {
 	params := &admin.ProductBatchDeleteStatusRequest{}
 	ok, response := p.VerifyParams(c, params)
 	if !ok {
@@ -102,7 +103,25 @@ func (p pmsProductController) BatchDeleteStatus(c *gin.Context) {
 	}
 
 	svc := service.NewProductService(c)
-	err := svc.BatchDeleteStatus(params)
+	err := svc.BatchSetDeleteStatus(params)
+	if err != nil {
+		response.Fail(error.NewErrWithBusinessError(err))
+		return
+	}
+
+	response.Success(nil)
+}
+
+// 批量设为新品
+func (p pmsProductController) BatchSetNewStatus(c *gin.Context) {
+	params := &admin.ProductBatchSetNewStatusRequest{}
+	ok, response := p.VerifyParams(c, params)
+	if !ok {
+		return
+	}
+
+	svc := service.NewProductService(c)
+	err := svc.BatchSetNewStatus(params)
 	if err != nil {
 		response.Fail(error.NewErrWithBusinessError(err))
 		return

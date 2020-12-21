@@ -58,6 +58,10 @@ func (p *ProductDao) SimpleList(product *model.PmsProduct) (list []*model.PmsPro
 	return
 }
 
-func (p *ProductDao) BatchDeleteStatus(ids []uint, deleteStatus uint8) error {
+func (p *ProductDao) BatchSetDeleteStatus(ids []uint, deleteStatus uint8) error {
 	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("delete_status", deleteStatus).Error
+}
+
+func (p ProductDao) BatchSetNewStatus(ids []uint, newStatus uint8) error {
+	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("new_status", newStatus).Error
 }
