@@ -8,7 +8,7 @@ import (
 func NewRouter() *gin.Engine {
 	r := gin.Default()
 
-	r.Use(middleware.Translations(), middleware.CollectError())
+	r.Use(middleware.Translations(), middleware.CollectError(nil))
 
 	r1 := r.Group("/api")
 	// 公共接口

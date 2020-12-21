@@ -1,6 +1,8 @@
 package util
 
 import (
+	"errors"
+
 	"github.com/gin-gonic/gin"
 	"github.com/summerKK/mall-api/global"
 	businessError "github.com/summerKK/mall-api/pkg/error"
@@ -18,8 +20,10 @@ func AddErrorToCtx(ctx *gin.Context, err error) {
 			return
 		}
 
-		if errors, ok := value.(*[]error); ok {
-			*errors = append(*errors, err)
+		if errList, ok := value.(*[]error); ok {
+			stack := Stack(2)
+			err = errors.New(stack + "\n" + err.Error())
+			*errList = append(*errList, err)
 		}
 	}
 }

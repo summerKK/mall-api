@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/shopspring/decimal"
+	"github.com/summerKK/mall-api/pkg/util"
 )
 
 // 商品的sku库存信息
@@ -29,7 +30,7 @@ func (a *PmsSkuStock) TableName() string {
 
 // 设置默认 skuCode
 func (a *PmsSkuStock) SetDefaultSkuCode(productId uint, i int) {
-	date := time.Now().Format("2006-01-02 15:04:05")
+	date := time.Now().Format(util.TimeLayout)
 	var buf strings.Builder
 	buf.WriteString(date)
 	// 四位商品id

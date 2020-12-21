@@ -7,6 +7,7 @@ import (
 
 	"github.com/summerKK/mall-api/global"
 	"github.com/summerKK/mall-api/pkg/setting"
+	"github.com/summerKK/mall-api/pkg/util"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -27,7 +28,7 @@ func (t LocalTime) MarshalJSON() ([]byte, error) {
 		return []byte(`""`), nil
 	}
 
-	formatted := fmt.Sprintf("\"%v\"", time.Time(t.Time).Format("2006-01-02 15:04:05"))
+	formatted := fmt.Sprintf("\"%v\"", time.Time(t.Time).Format(util.TimeLayout))
 	return []byte(formatted), nil
 }
 

@@ -2,6 +2,8 @@ package middleware
 
 import (
 	"bytes"
+	"io"
+	"os"
 	"time"
 
 	"github.com/fatih/color"
@@ -10,7 +12,11 @@ import (
 )
 
 //  收集运行时的错误日志并打印
-func CollectError() gin.HandlerFunc {
+func CollectError(writer io.Writer) gin.HandlerFunc {
+	if writer == nil {
+		writer = os.Stdout
+	}
+
 	key := util.GetCtxErrorKey()
 	return func(c *gin.Context) {
 		// 设置收集错误的collection
@@ -29,7 +35,7 @@ func CollectError() gin.HandlerFunc {
 					buf.WriteByte('\n')
 				}
 
-				color.Yellow("[%s]\n-------------\n%s-------------", time.Now().Format("2006-01-02 15:04:05"), buf.String())
+				color.Yellow("[%s]\n-------------\n%s-------------", time.Now().Format(util.TimeLayout), buf.String())
 			}
 		}
 	}
