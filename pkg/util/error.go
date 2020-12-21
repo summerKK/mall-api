@@ -22,7 +22,7 @@ func AddErrorToCtx(ctx *gin.Context, err error) {
 
 		if errList, ok := value.(*[]error); ok {
 			stack := Stack(2)
-			err = errors.New(stack + "\n" + err.Error())
+			err = errors.New(err.Error() + "\n\n" + stack)
 			*errList = append(*errList, err)
 		}
 	}
