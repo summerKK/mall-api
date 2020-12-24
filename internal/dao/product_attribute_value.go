@@ -2,12 +2,12 @@ package dao
 
 import "gorm.io/gorm"
 
-type ProductAttributeValueDao struct {
+type ProductAttributeValue struct {
 	*Dao
 }
 
-func NewProductAttributeValue(db *gorm.DB) *ProductAttributeValueDao {
-	return &ProductAttributeValueDao{
+func NewProductAttributeValue(db *gorm.DB) *ProductAttributeValue {
+	return &ProductAttributeValue{
 		NewDao(db),
 	}
 }

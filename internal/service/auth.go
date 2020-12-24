@@ -13,7 +13,7 @@ import (
 
 type AdminService struct {
 	service *service
-	dao     *dao.AuthDao
+	dao     *dao.Auth
 }
 
 func NewAdminService(ctx *gin.Context) *AdminService {

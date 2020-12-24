@@ -2,12 +2,12 @@ package dao
 
 import "gorm.io/gorm"
 
-type ProductFullReductionDao struct {
+type ProductFullReduction struct {
 	*Dao
 }
 
-func NewProductFullReduction(db *gorm.DB) *ProductFullReductionDao {
-	return &ProductFullReductionDao{
+func NewProductFullReduction(db *gorm.DB) *ProductFullReduction {
+	return &ProductFullReduction{
 		NewDao(db),
 	}
 }

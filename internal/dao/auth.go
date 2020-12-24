@@ -5,28 +5,28 @@ import (
 	"gorm.io/gorm"
 )
 
-type AuthDao struct {
+type Auth struct {
 	*Dao
 }
 
-func NewAuth(db *gorm.DB) *AuthDao {
-	return &AuthDao{
+func NewAuth(db *gorm.DB) *Auth {
+	return &Auth{
 		NewDao(db),
 	}
 }
 
-func (a *AuthDao) Register(user *model.UmsAdmin) error {
+func (a *Auth) Register(user *model.UmsAdmin) error {
 	err := a.db.Create(user).Error
 	return err
 }
 
-func (a *AuthDao) GetItemByName(username string) (*model.UmsAdmin, error) {
+func (a *Auth) GetItemByName(username string) (*model.UmsAdmin, error) {
 	user := &model.UmsAdmin{}
 	_, err := a.GetItemByColumns(map[string]interface{}{"username": username}, user)
 
 	return user, err
 }
 
-func (a *AuthDao) DeleteItemById(userId int) error {
+func (a *Auth) DeleteItemById(userId int) error {
 	return a.db.Delete(&model.UmsAdmin{}, userId).Error
 }

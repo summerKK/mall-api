@@ -59,4 +59,5 @@ type ProductBatchSetRecommendStatusRequest struct {
 type ProductBatchSetVerifyStatusRequest struct {
 	Ids          []uint `form:"ids" binding:"required"`
 	VerifyStatus uint8  `form:"verifyStatus" binding:"required,oneof=0 1"`
+	Detail       string `form:"detail" binding:"required"`
 }

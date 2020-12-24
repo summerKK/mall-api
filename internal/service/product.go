@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/summerKK/mall-api/global"
@@ -15,7 +16,7 @@ import (
 
 type ProductService struct {
 	service   *service
-	dao       *dao.ProductDao
+	dao       *dao.Product
 	productId uint
 	// 操作事物对应的tx
 	tx *gorm.DB
@@ -52,6 +53,7 @@ func (s *ProductService) beginTransaction() *gorm.DB {
 
 func (s *ProductService) Create(params *admin.ProductRequest) (product *model.PmsProduct, err error) {
 
+	// 开启事务
 	tx := s.beginTransaction()
 	defer func() {
 		if r := recover(); r != nil {
@@ -171,8 +173,43 @@ func (s *ProductService) BatchSetRecommendStatus(params *admin.ProductBatchSetRe
 	return s.dao.BatchSetRecommendStatus(params.Ids, params.RecommendStatus)
 }
 
-func (s *ProductService) BatchSetVerifyStatus(params *admin.ProductBatchSetVerifyStatusRequest) error {
-	return s.dao.BatchSetVerifyStatus(params.Ids, params.VerifyStatus)
+func (s *ProductService) BatchSetVerifyStatus(params *admin.ProductBatchSetVerifyStatusRequest) (err error) {
+
+	tx := s.beginTransaction()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		}
+	}()
+
+	err = s.dao.BatchSetVerifyStatus(params.Ids, params.VerifyStatus)
+	if err != nil {
+		tx.Rollback()
+		return
+	}
+
+	verifyRecordDao := dao.NewProductVerifyRecord(tx)
+	var verifyProductRecordList []*model.PmsProductVerifyRecord
+	for _, id := range params.Ids {
+		record := &model.PmsProductVerifyRecord{
+			ProductId:  id,
+			CreateTime: model.LocalTime{Time: time.Now()},
+			VertifyMan: "test",
+			Status:     params.VerifyStatus,
+			Detail:     params.Detail,
+		}
+		verifyProductRecordList = append(verifyProductRecordList, record)
+	}
+
+	err = verifyRecordDao.Insert(verifyProductRecordList)
+	if err != nil {
+		tx.Rollback()
+		return
+	}
+
+	tx.Commit()
+
+	return
 }
 
 func (s *ProductService) saveAdditionalAttr(params *admin.ProductRequest) (err error) {

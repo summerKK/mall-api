@@ -5,17 +5,17 @@ import (
 	"gorm.io/gorm"
 )
 
-type ProductDao struct {
+type Product struct {
 	*Dao
 }
 
-func NewProduct(db *gorm.DB) *ProductDao {
-	return &ProductDao{
+func NewProduct(db *gorm.DB) *Product {
+	return &Product{
 		NewDao(db),
 	}
 }
 
-func (p *ProductDao) DeleteAdditionalAttr(product *model.PmsProduct) {
+func (p *Product) DeleteAdditionalAttr(product *model.PmsProduct) {
 	// 会员价格
 	p.db.Where("product_id", product.Id).Delete(&model.PmsMemberPrice{})
 	// 阶梯价格
@@ -32,7 +32,7 @@ func (p *ProductDao) DeleteAdditionalAttr(product *model.PmsProduct) {
 	p.db.Where("product_id", product.Id).Delete(&model.CmsPrefrenceAreaProductRelation{})
 }
 
-func (p *ProductDao) List(product *model.PmsProduct, pageSize int, pageOffset int) (list []*model.PmsProduct, count int64, err error) {
+func (p *Product) List(product *model.PmsProduct, pageSize int, pageOffset int) (list []*model.PmsProduct, count int64, err error) {
 	name := product.Name
 	product.Name = ""
 	db := p.db.Where(product)
@@ -45,7 +45,7 @@ func (p *ProductDao) List(product *model.PmsProduct, pageSize int, pageOffset in
 	return
 }
 
-func (p *ProductDao) SimpleList(product *model.PmsProduct) (list []*model.PmsProduct, err error) {
+func (p *Product) SimpleList(product *model.PmsProduct) (list []*model.PmsProduct, err error) {
 	name := product.Name
 	product.Name = ""
 	db := p.db.Where(product)
@@ -58,22 +58,22 @@ func (p *ProductDao) SimpleList(product *model.PmsProduct) (list []*model.PmsPro
 	return
 }
 
-func (p *ProductDao) BatchSetDeleteStatus(ids []uint, deleteStatus uint8) error {
+func (p *Product) BatchSetDeleteStatus(ids []uint, deleteStatus uint8) error {
 	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("delete_status", deleteStatus).Error
 }
 
-func (p ProductDao) BatchSetNewStatus(ids []uint, newStatus uint8) error {
+func (p Product) BatchSetNewStatus(ids []uint, newStatus uint8) error {
 	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("new_status", newStatus).Error
 }
 
-func (p ProductDao) BatchSetPublishStatus(ids []uint, publishStatus uint8) error {
+func (p Product) BatchSetPublishStatus(ids []uint, publishStatus uint8) error {
 	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("publish_status", publishStatus).Error
 }
 
-func (p ProductDao) BatchSetRecommendStatus(ids []uint, recommandStatus uint8) error {
+func (p Product) BatchSetRecommendStatus(ids []uint, recommandStatus uint8) error {
 	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("recommand_status", recommandStatus).Error
 }
 
-func (p ProductDao) BatchSetVerifyStatus(ids []uint, verifyStatus uint8) error {
+func (p Product) BatchSetVerifyStatus(ids []uint, verifyStatus uint8) error {
 	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("verify_status", verifyStatus).Error
 }

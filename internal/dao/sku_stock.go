@@ -2,12 +2,12 @@ package dao
 
 import "gorm.io/gorm"
 
-type SkuStockDao struct {
+type SkuStock struct {
 	*Dao
 }
 
-func NewSkuStock(db *gorm.DB) *SkuStockDao {
-	return &SkuStockDao{
+func NewSkuStock(db *gorm.DB) *SkuStock {
+	return &SkuStock{
 		NewDao(db),
 	}
 }

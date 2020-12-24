@@ -2,12 +2,12 @@ package dao
 
 import "gorm.io/gorm"
 
-type MemberPriceDao struct {
+type MemberPrice struct {
 	*Dao
 }
 
-func NewMemberPrice(db *gorm.DB) *MemberPriceDao {
-	return &MemberPriceDao{
+func NewMemberPrice(db *gorm.DB) *MemberPrice {
+	return &MemberPrice{
 		NewDao(db),
 	}
 }

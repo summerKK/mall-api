@@ -2,12 +2,12 @@ package dao
 
 import "gorm.io/gorm"
 
-type ProductLadderDao struct {
+type ProductLadder struct {
 	*Dao
 }
 
-func NewProductLadder(db *gorm.DB) *ProductLadderDao {
-	return &ProductLadderDao{
+func NewProductLadder(db *gorm.DB) *ProductLadder {
+	return &ProductLadder{
 		NewDao(db),
 	}
 }
