@@ -65,3 +65,15 @@ func (p *ProductDao) BatchSetDeleteStatus(ids []uint, deleteStatus uint8) error 
 func (p ProductDao) BatchSetNewStatus(ids []uint, newStatus uint8) error {
 	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("new_status", newStatus).Error
 }
+
+func (p ProductDao) BatchSetPublishStatus(ids []uint, publishStatus uint8) error {
+	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("publish_status", publishStatus).Error
+}
+
+func (p ProductDao) BatchSetRecommendStatus(ids []uint, recommandStatus uint8) error {
+	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("recommand_status", recommandStatus).Error
+}
+
+func (p ProductDao) BatchSetVerifyStatus(ids []uint, verifyStatus uint8) error {
+	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("verify_status", verifyStatus).Error
+}

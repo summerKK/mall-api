@@ -45,3 +45,18 @@ type ProductBatchSetNewStatusRequest struct {
 	Ids       []uint `form:"ids" binding:"required"`
 	NewStatus uint8  `form:"newStatus" binding:"required,oneof=0 1"`
 }
+
+type ProductBatchSetPublishStatusRequest struct {
+	Ids           []uint `form:"ids" binding:"required"`
+	PublishStatus uint8  `form:"publishStatus" binding:"required,oneof=0 1"`
+}
+
+type ProductBatchSetRecommendStatusRequest struct {
+	Ids             []uint `form:"ids" binding:"required"`
+	RecommendStatus uint8  `form:"recommendStatus" binding:"required,oneof=0 1"`
+}
+
+type ProductBatchSetVerifyStatusRequest struct {
+	Ids          []uint `form:"ids" binding:"required"`
+	VerifyStatus uint8  `form:"verifyStatus" binding:"required,oneof=0 1"`
+}

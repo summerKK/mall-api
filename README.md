@@ -18,9 +18,13 @@
 
 - 商品管理
     - [x] POST /api/product/create
-    - [x] POST /api/product/update/:id
     - [x] GET /api/product/list
     - [x] GET /api/product/simpleList
+    - [x] POST /api/product/update/:id
     - [x] POST /api/product/batchUpdate/deleteStatus -> /api/product/update/deleteStatus
     - [x] POST /api/product/batchUpdate/newStatus -> /api/product/update/newStatus
+    - [x] POST /api/product/batchUpdate/publishStatus -> /api/product/update/publishStatus 
+    - [x] POST /api/product/batchUpdate/recommendStatus -> /api/product/update/recommendStatus
+    - [x] POST /api/product/batchUpdate/verifyStatus -> /api/product/update/verifyStatus
+    - [ ] GET /api/product/updateInfo/:id
 

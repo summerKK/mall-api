@@ -129,3 +129,54 @@ func (p pmsProductController) BatchSetNewStatus(c *gin.Context) {
 
 	response.Success(nil)
 }
+
+func (p pmsProductController) BatchSetPublishStatus(c *gin.Context) {
+	params := &admin.ProductBatchSetPublishStatusRequest{}
+	ok, response := p.VerifyParams(c, params)
+	if !ok {
+		return
+	}
+
+	svc := service.NewProductService(c)
+	err := svc.BatchSetPublishStatus(params)
+	if err != nil {
+		response.Fail(error.NewErrWithBusinessError(err))
+		return
+	}
+
+	response.Success(nil)
+}
+
+func (p pmsProductController) BatchSetRecommendStatus(c *gin.Context) {
+	params := &admin.ProductBatchSetRecommendStatusRequest{}
+	ok, response := p.VerifyParams(c, params)
+	if !ok {
+		return
+	}
+
+	svc := service.NewProductService(c)
+	err := svc.BatchSetRecommendStatus(params)
+	if err != nil {
+		response.Fail(error.NewErrWithBusinessError(err))
+		return
+	}
+
+	response.Success(nil)
+}
+
+func (p pmsProductController) BatchSetVerifyStatus(c *gin.Context) {
+	params := &admin.ProductBatchSetVerifyStatusRequest{}
+	ok, response := p.VerifyParams(c, params)
+	if !ok {
+		return
+	}
+
+	svc := service.NewProductService(c)
+	err := svc.BatchSetVerifyStatus(params)
+	if err != nil {
+		response.Fail(error.NewErrWithBusinessError(err))
+		return
+	}
+
+	response.Success(nil)
+}

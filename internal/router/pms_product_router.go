@@ -19,4 +19,10 @@ func pmsProductRouter(r *gin.RouterGroup) {
 	r1.POST("/batchUpdate/deleteStatus", admin.PmsProductController.BatchSetDeleteStatus)
 	// 批量设为新品
 	r1.POST("/batchUpdate/newStatus", admin.PmsProductController.BatchSetNewStatus)
+	// 批量上下架
+	r1.POST("/batchUpdate/publishStatus", admin.PmsProductController.BatchSetPublishStatus)
+	// 批量推荐商品
+	r1.POST("/batchUpdate/recommendStatus", admin.PmsProductController.BatchSetRecommendStatus)
+	// 批量修改审核状态
+	r1.POST("/batchUpdate/verifyStatus", admin.PmsProductController.BatchSetVerifyStatus)
 }

@@ -163,6 +163,18 @@ func (s *ProductService) BatchSetNewStatus(params *admin.ProductBatchSetNewStatu
 	return s.dao.BatchSetNewStatus(params.Ids, params.NewStatus)
 }
 
+func (s *ProductService) BatchSetPublishStatus(params *admin.ProductBatchSetPublishStatusRequest) error {
+	return s.dao.BatchSetPublishStatus(params.Ids, params.PublishStatus)
+}
+
+func (s *ProductService) BatchSetRecommendStatus(params *admin.ProductBatchSetRecommendStatusRequest) error {
+	return s.dao.BatchSetRecommendStatus(params.Ids, params.RecommendStatus)
+}
+
+func (s *ProductService) BatchSetVerifyStatus(params *admin.ProductBatchSetVerifyStatusRequest) error {
+	return s.dao.BatchSetVerifyStatus(params.Ids, params.VerifyStatus)
+}
+
 func (s *ProductService) saveAdditionalAttr(params *admin.ProductRequest) (err error) {
 	// 会员价格
 	memberPrice := params.MemberPriceList
