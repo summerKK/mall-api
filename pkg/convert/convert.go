@@ -14,9 +14,27 @@ func (s StrTo) Int() (int, error) {
 	return strconv.Atoi(s.String())
 }
 
+// 转换为 uint
+func (s StrTo) UInt() (uint, error) {
+	i, err := s.Int()
+	if err != nil {
+		return 0, err
+	}
+	u := uint(i)
+
+	return u, nil
+}
+
 // 强制转换为 int
 func (s StrTo) MustInt() int {
 	v, _ := s.Int()
+
+	return v
+}
+
+// 强制转换为 uint
+func (s StrTo) MustUInt() uint {
+	v, _ := s.UInt()
 
 	return v
 }

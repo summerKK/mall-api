@@ -180,3 +180,23 @@ func (p pmsProductController) BatchSetVerifyStatus(c *gin.Context) {
 
 	response.Success(nil)
 }
+
+func (p pmsProductController) GetUpdateInfo(c *gin.Context) {
+	response := app.NewResponse(c)
+
+	productIdS := c.Param("id")
+	productId := convert.StrTo(productIdS).MustUInt()
+	if productId == 0 {
+		response.Fail(error.InvalidParams)
+		return
+	}
+
+	svc := service.NewProductService(c)
+	info, err := svc.ProductUpdateInfo(productId)
+	if err != nil {
+		response.Fail(error.NewErrWithBusinessError(err))
+		return
+	}
+
+	response.Success(info)
+}

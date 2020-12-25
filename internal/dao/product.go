@@ -77,3 +77,16 @@ func (p Product) BatchSetRecommendStatus(ids []uint, recommandStatus uint8) erro
 func (p Product) BatchSetVerifyStatus(ids []uint, verifyStatus uint8) error {
 	return p.db.Model(&model.PmsProduct{}).Where("id in (?)", ids).Update("verify_status", verifyStatus).Error
 }
+
+func (p Product) GetUpdateInfo(product *model.PmsProductWithRelation, id uint) (err error) {
+	return p.db.
+		Where("id = ?", id).
+		Preload("ProductLadderList").
+		Preload("ProductFullReductionList").
+		Preload("MemberPriceList").
+		Preload("SkuStockList").
+		Preload("ProductAttributeValueList").
+		Preload("SubjectProductRelationList").
+		Preload("PrefrenceAreaProductRelationList").
+		First(product).Error
+}

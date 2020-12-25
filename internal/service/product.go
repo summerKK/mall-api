@@ -181,9 +181,7 @@ func (s *ProductService) BatchSetVerifyStatus(params *admin.ProductBatchSetVerif
 			tx.Rollback()
 		}
 
-		if err != nil {
-			util.AddErrorToCtx(s.service.ctx, err)
-		}
+		util.AddErrorToCtx(s.service.ctx, err)
 	}()
 
 	err = s.dao.BatchSetVerifyStatus(params.Ids, params.VerifyStatus)
@@ -212,6 +210,18 @@ func (s *ProductService) BatchSetVerifyStatus(params *admin.ProductBatchSetVerif
 	}
 
 	tx.Commit()
+
+	return
+}
+
+func (s *ProductService) ProductUpdateInfo(id uint) (product *model.PmsProductWithRelation, err error) {
+	defer func() {
+		util.AddErrorToCtx(s.service.ctx, err)
+	}()
+
+	product = &model.PmsProductWithRelation{}
+
+	err = s.dao.GetUpdateInfo(product, id)
 
 	return
 }

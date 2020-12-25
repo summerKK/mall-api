@@ -25,4 +25,6 @@ func pmsProductRouter(r *gin.RouterGroup) {
 	r1.POST("/batchUpdate/recommendStatus", admin.PmsProductController.BatchSetRecommendStatus)
 	// 批量修改审核状态
 	r1.POST("/batchUpdate/verifyStatus", admin.PmsProductController.BatchSetVerifyStatus)
+	// 根据商品id获取商品编辑信息
+	r1.GET("/updateInfo/:id", admin.PmsProductController.GetUpdateInfo)
 }

@@ -26,5 +26,5 @@
     - [x] POST /api/product/batchUpdate/publishStatus -> /api/product/update/publishStatus 
     - [x] POST /api/product/batchUpdate/recommendStatus -> /api/product/update/recommendStatus
     - [x] POST /api/product/batchUpdate/verifyStatus -> /api/product/update/verifyStatus
-    - [ ] GET /api/product/updateInfo/:id
+    - [x] GET /api/product/updateInfo/:id
 

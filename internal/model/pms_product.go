@@ -1,11 +1,34 @@
 package model
 
-import "github.com/shopspring/decimal"
+import (
+	"github.com/shopspring/decimal"
+)
 
 const (
 	PmsProductDeleteStatusUnDel = 0
 	PmsProductDeleteStatusDel   = 1
 )
+
+type PmsProductAdditional struct {
+	// 商品描述
+	Description string `json:"description"`
+	DetailDesc  string `json:"detailDesc"`
+	// 产品详情网页内容
+	DetailHtml string `json:"detailHtml"`
+	// 移动端网页详情
+	DetailMobileHtml string `json:"detailMobileHtml"`
+}
+
+type PmsProductWithRelation struct {
+	*PmsProduct
+	ProductLadderList                []*PmsProductLadder                `json:"productLadderList" gorm:"foreignKey:ProductId"`
+	ProductFullReductionList         []*PmsProductFullReduction         `json:"productFullReductionList" gorm:"foreignKey:ProductId"`
+	MemberPriceList                  []*PmsMemberPrice                  `json:"memberPriceList" gorm:"foreignKey:ProductId"`
+	SkuStockList                     []*PmsSkuStock                     `json:"skuStockList" gorm:"foreignKey:ProductId"`
+	ProductAttributeValueList        []*PmsProductAttributeValue        `json:"productAttributeValueList" gorm:"foreignKey:ProductId"`
+	SubjectProductRelationList       []*CmsSubjectProductRelation       `json:"subjectProductRelationList" gorm:"foreignKey:ProductId"`
+	PrefrenceAreaProductRelationList []*CmsPrefrenceAreaProductRelation `json:"prefrenceAreaProductRelationList" gorm:"foreignKey:ProductId"`
+}
 
 type PmsProduct struct {
 	ID
@@ -78,16 +101,6 @@ type PmsProduct struct {
 
 	// 附加属性
 	PmsProductAdditional
-}
-
-type PmsProductAdditional struct {
-	// 商品描述
-	Description string `json:"description"`
-	DetailDesc  string `json:"detailDesc"`
-	// 产品详情网页内容
-	DetailHtml string `json:"detailHtml"`
-	// 移动端网页详情
-	DetailMobileHtml string `json:"detailMobileHtml"`
 }
 
 func (a *PmsProduct) TableName() string {
