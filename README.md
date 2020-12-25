@@ -11,10 +11,19 @@
 # 已经实现的接口
 
 - 后台用户管理
-    - [x] POST /api/admin/login
-    - [x] POST /api/admin/register
     - [x] GET /api/admin/:id
     - [x] POST /api/admin/delete/:id
+    - [ ] GET /api/admin/info
+    - [ ] GET /api/admin/list
+    - [x] POST /api/admin/login
+    - [ ] POST /api/admin/logout
+    - [ ] GET /api/admin/refreshToken
+    - [x] POST /api/admin/register
+    - [ ] GET /api/admin/role/:adminId
+    - [ ] POST /api/admin/role/update
+    - [ ] POST /api/admin/update/:id
+    - [ ] POST /api/admin/updatePassword
+    - [ ] POST /api/admin/updateStatus/:id
 
 - 商品管理
     - [x] POST /api/product/create
@@ -23,7 +32,7 @@
     - [x] POST /api/product/update/:id
     - [x] POST /api/product/batchUpdate/deleteStatus -> /api/product/update/deleteStatus
     - [x] POST /api/product/batchUpdate/newStatus -> /api/product/update/newStatus
-    - [x] POST /api/product/batchUpdate/publishStatus -> /api/product/update/publishStatus 
+    - [x] POST /api/product/batchUpdate/publishStatus -> /api/product/update/publishStatus
     - [x] POST /api/product/batchUpdate/recommendStatus -> /api/product/update/recommendStatus
     - [x] POST /api/product/batchUpdate/verifyStatus -> /api/product/update/verifyStatus
     - [x] GET /api/product/updateInfo/:id
