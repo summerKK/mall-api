@@ -16,7 +16,7 @@ func CollectError(writer io.Writer) gin.HandlerFunc {
 	if writer == nil {
 		writer = os.Stdout
 	}
-	colo := color.New(color.BgHiYellow)
+	colo := color.New(color.FgYellow)
 
 	key := util.GetCtxErrorKey()
 	return func(c *gin.Context) {
@@ -36,7 +36,7 @@ func CollectError(writer io.Writer) gin.HandlerFunc {
 					buf.WriteByte('\n')
 				}
 
-				_, _ = colo.Fprintf(writer, "[%s]\n-------------\n%s-------------", time.Now().Format(util.TimeLayout), buf.String())
+				_, _ = colo.Fprintf(writer, "[%s]\n-------------\n%s-------------\n", time.Now().Format(util.TimeLayout), buf.String())
 			}
 		}
 	}

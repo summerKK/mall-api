@@ -180,6 +180,10 @@ func (s *ProductService) BatchSetVerifyStatus(params *admin.ProductBatchSetVerif
 		if r := recover(); r != nil {
 			tx.Rollback()
 		}
+
+		if err != nil {
+			util.AddErrorToCtx(s.service.ctx, err)
+		}
 	}()
 
 	err = s.dao.BatchSetVerifyStatus(params.Ids, params.VerifyStatus)
