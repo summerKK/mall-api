@@ -88,5 +88,6 @@ func (p Product) GetUpdateInfo(product *model.PmsProductWithRelation, id uint) (
 		Preload("ProductAttributeValueList").
 		Preload("SubjectProductRelationList").
 		Preload("PrefrenceAreaProductRelationList").
+		Preload("ProductCategory").
 		First(product).Error
 }

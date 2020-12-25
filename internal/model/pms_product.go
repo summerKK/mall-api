@@ -20,6 +20,7 @@ type PmsProductAdditional struct {
 }
 
 type PmsProductWithRelation struct {
+	CateParentId uint `json:"cateParentId"`
 	*PmsProduct
 	ProductLadderList                []*PmsProductLadder                `json:"productLadderList" gorm:"foreignKey:ProductId"`
 	ProductFullReductionList         []*PmsProductFullReduction         `json:"productFullReductionList" gorm:"foreignKey:ProductId"`
@@ -28,6 +29,7 @@ type PmsProductWithRelation struct {
 	ProductAttributeValueList        []*PmsProductAttributeValue        `json:"productAttributeValueList" gorm:"foreignKey:ProductId"`
 	SubjectProductRelationList       []*CmsSubjectProductRelation       `json:"subjectProductRelationList" gorm:"foreignKey:ProductId"`
 	PrefrenceAreaProductRelationList []*CmsPrefrenceAreaProductRelation `json:"prefrenceAreaProductRelationList" gorm:"foreignKey:ProductId"`
+	ProductCategory                  *PmsProductCategory                `json:"productCategory" gorm:"foreignKey:id;references:ProductCategoryId"`
 }
 
 type PmsProduct struct {

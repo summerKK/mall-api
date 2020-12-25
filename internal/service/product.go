@@ -222,6 +222,9 @@ func (s *ProductService) ProductUpdateInfo(id uint) (product *model.PmsProductWi
 	product = &model.PmsProductWithRelation{}
 
 	err = s.dao.GetUpdateInfo(product, id)
+	if err == nil {
+		product.CateParentId = product.ProductCategory.ParentId
+	}
 
 	return
 }
