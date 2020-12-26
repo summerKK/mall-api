@@ -24,13 +24,13 @@ func (u umsAdminController) Login(c *gin.Context) {
 	}
 
 	svc := service.NewAdminService(c)
-	err := svc.Login(params)
+	user, err := svc.Login(params)
 	if err != nil {
 		response.Fail(error.UnauthorizedAuthNotExist)
 		return
 	}
 
-	token, err := app.GenerateToken(params.UserName)
+	token, err := app.GenerateToken(int(user.Id))
 	if err != nil {
 		response.Fail(error.UnauthorizedTokenGenerate)
 		return

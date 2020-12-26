@@ -9,7 +9,7 @@ import (
 
 // jwt token 验证实现
 type Claims struct {
-	AppKey string `json:"app_key"`
+	UserId int `json:"userId"`
 	jwt.StandardClaims
 }
 
@@ -18,11 +18,11 @@ func GetJWTSecret() []byte {
 }
 
 //  生成 token
-func GenerateToken(appKey string) (string, error) {
+func GenerateToken(userId int) (string, error) {
 	nowTime := time.Now()
 	expireTime := nowTime.Add(global.JWTSetting.Expire * time.Second)
 	claims := Claims{
-		AppKey: appKey,
+		UserId: userId,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
 			Issuer:    global.JWTSetting.Issuer,

@@ -25,21 +25,23 @@ func NewAdminService(ctx *gin.Context) *AdminService {
 }
 
 // 用户登录
-func (s *AdminService) Login(param *admin.UserLoginRequest) (err error) {
+func (s *AdminService) Login(param *admin.UserLoginRequest) (user *model.UmsAdmin, err error) {
 	defer func() {
 		util.AddErrorToCtx(s.service.ctx, err)
 	}()
 
-	user, err := s.dao.GetItemByName(param.UserName)
+	user, err = s.dao.GetItemByName(param.UserName)
 	if err != nil {
-		return err
+		return
 	}
 
 	if security.VerifyPassword(user.Password, param.Password) {
-		return nil
+		return
 	}
 
-	return businessError.NewBusinessError("check auth failed")
+	err = businessError.NewBusinessError("check auth failed")
+
+	return
 }
 
 // 用户注册
