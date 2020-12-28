@@ -14,31 +14,35 @@ func AuthAdmin() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		bearToken := c.GetHeader("Authorization")
 		response := app.NewResponse(c)
-		if bearToken == "" {
+		var err error
+
+		responseHandler := func() {
+			util.AddErrorToCtx(c, err)
 			response.Fail(errorCode.UnauthorizedTokenError)
 			c.Abort()
+			return
+		}
+
+		if bearToken == "" {
+			responseHandler()
 			return
 		}
 
 		bearToken = strings.Replace(bearToken, "Bearer ", "", 1)
 		claims, err := app.ParseToken(bearToken)
 		if err != nil {
-			util.AddErrorToCtx(c, err)
-			response.Fail(errorCode.UnauthorizedTokenError)
-			c.Abort()
+			responseHandler()
 			return
 		}
 
 		// 获取用户信息
 		user, err := service.NewAdminService(c).GetItem(claims.UserId)
 		if err != nil {
-			util.AddErrorToCtx(c, err)
-			response.Fail(errorCode.UnauthorizedTokenError)
-			c.Abort()
+			responseHandler()
 			return
 		}
-		c.Set("userInfo", user)
 
+		c.Set("userInfo", user)
 		c.Next()
 	}
 }

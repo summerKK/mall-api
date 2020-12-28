@@ -81,6 +81,7 @@ func (s *AdminService) GetItem(userId int) (user *model.UmsAdmin, err error) {
 		util.AddErrorToCtx(s.service.ctx, err)
 	}()
 
+	user = &model.UmsAdmin{}
 	_, err = s.dao.GetItemById(userId, user)
 	if err != nil {
 		return nil, err
