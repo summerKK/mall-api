@@ -94,3 +94,16 @@ func (_ umsAdminController) DeleteItem(c *gin.Context) {
 
 	response.Success(nil)
 }
+
+func (u umsAdminController) GetAdminInfo(c *gin.Context) {
+	response := app.NewResponse(c)
+
+	svc := service.NewAdminService(c)
+	adminInfo, err := svc.GetAdminInfo()
+	if err != nil {
+		response.Fail(error.OperationFailure)
+		return
+	}
+
+	response.Success(adminInfo)
+}

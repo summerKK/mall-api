@@ -99,3 +99,20 @@ func (s *AdminService) DeleteItem(userId int) (err error) {
 
 	return
 }
+
+// TODO 添加 menus、icon、roles
+func (s *AdminService) GetAdminInfo() (userInfo map[string]interface{}, err error) {
+	user, err := model.GetUser(s.service.ctx)
+	if err != nil {
+		return
+	}
+
+	userInfo = map[string]interface{}{
+		"username": user.Username,
+		"menus":    []int{},
+		"icon":     user.Icon,
+		"roles":    []int{},
+	}
+
+	return
+}

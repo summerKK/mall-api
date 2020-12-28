@@ -11,9 +11,9 @@
 # 已经实现的接口
 
 - 后台用户管理
-    - [x] GET /api/admin/:id
+    - [x] GET /api/admin/:id -> GET /api/admin/user/:id
     - [x] POST /api/admin/delete/:id
-    - [ ] GET /api/admin/info
+    - [x] GET /api/admin/info (用户菜单和角色还没有获取)
     - [ ] GET /api/admin/list
     - [x] POST /api/admin/login
     - [ ] POST /api/admin/logout
