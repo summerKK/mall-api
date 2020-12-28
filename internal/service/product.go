@@ -196,7 +196,7 @@ func (s *ProductService) BatchSetVerifyStatus(params *admin.ProductBatchSetVerif
 		record := &model.PmsProductVerifyRecord{
 			ProductId:  id,
 			CreateTime: model.LocalTime{Time: time.Now()},
-			VertifyMan: util.MustGetUser(s.service.ctx).Username,
+			VertifyMan: model.MustGetUser(s.service.ctx).Username,
 			Status:     params.VerifyStatus,
 			Detail:     params.Detail,
 		}

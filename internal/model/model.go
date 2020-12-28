@@ -2,9 +2,11 @@ package model
 
 import (
 	"database/sql/driver"
+	"errors"
 	"fmt"
 	"time"
 
+	"github.com/gin-gonic/gin"
 	"github.com/summerKK/mall-api/global"
 	"github.com/summerKK/mall-api/pkg/setting"
 	"github.com/summerKK/mall-api/pkg/util"
@@ -81,4 +83,24 @@ func NewDbEngine(dbSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 	sqlDb.SetMaxOpenConns(global.DatabaseSetting.MaxOpenConns)
 
 	return db, nil
+}
+
+func GetUser(c *gin.Context) (*UmsAdmin, error) {
+	value, exists := c.Get("userInfo")
+	if exists {
+		if admin, ok := value.(*UmsAdmin); ok {
+			return admin, nil
+		}
+	}
+
+	return nil, errors.New("user not exist")
+}
+
+func MustGetUser(c *gin.Context) *UmsAdmin {
+	user, err := GetUser(c)
+	if err != nil {
+		return &UmsAdmin{}
+	}
+
+	return user
 }
