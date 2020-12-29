@@ -37,3 +37,15 @@
     - [x] POST /api/product/batchUpdate/verifyStatus -> /api/product/update/verifyStatus
     - [x] GET /api/product/updateInfo/:id
 
+- 后台用户角色管理
+    - [ ] POST /api/role/allocMenu
+    - [ ] POST /api/role/allocResource
+    - [ ] POST /api/role/create
+    - [ ] POST /api/role/delete
+    - [ ] GET /api/role/list
+    - [ ] GET /api/role/listAll
+    - [ ] GET /api/role/listMenu/:roleId
+    - [ ] GET /api/role/listResource/:roleId
+    - [ ] POST /api/role/update/:id
+    - [ ] POST /api/role/updateStatus/:id
+
