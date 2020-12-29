@@ -2,7 +2,6 @@ package service
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/summerKK/mall-api/global"
@@ -195,7 +194,6 @@ func (s *ProductService) BatchSetVerifyStatus(params *admin.ProductBatchSetVerif
 	for _, id := range params.Ids {
 		record := &model.PmsProductVerifyRecord{
 			ProductId:  id,
-			CreateTime: model.LocalTime{Time: time.Now()},
 			VertifyMan: model.MustGetUser(s.service.ctx).Username,
 			Status:     params.VerifyStatus,
 			Detail:     params.Detail,

@@ -1,5 +1,11 @@
 package model
 
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
+
 type PmsProductVerifyRecord struct {
 	ID
 	ProductId  uint      `json:"productId"`
@@ -9,6 +15,12 @@ type PmsProductVerifyRecord struct {
 	Detail     string    `json:"detail"`
 }
 
-func (a *PmsProductVerifyRecord) TableName() string {
+func (p *PmsProductVerifyRecord) TableName() string {
 	return "pms_product_vertify_record"
+}
+
+func (p *PmsProductVerifyRecord) BeforeCreate(tx *gorm.DB) (err error) {
+	p.CreateTime = LocalTime{time.Now()}
+
+	return nil
 }
