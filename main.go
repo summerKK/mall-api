@@ -13,6 +13,7 @@ func init() {
 	boot.Boot()
 }
 
+// 2020再见
 func main() {
 	r := router.NewRouter()
 
