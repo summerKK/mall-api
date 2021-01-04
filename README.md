@@ -39,7 +39,7 @@
 
 - 后台用户角色管理
     - [x] POST /api/role/allocMenu
-    - [ ] POST /api/role/allocResource
+    - [x] POST /api/role/allocResource
     - [x] POST /api/role/create
     - [ ] POST /api/role/delete
     - [ ] GET /api/role/list
