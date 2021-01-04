@@ -38,7 +38,7 @@
     - [x] GET /api/product/updateInfo/:id
 
 - 后台用户角色管理
-    - [ ] POST /api/role/allocMenu
+    - [x] POST /api/role/allocMenu
     - [ ] POST /api/role/allocResource
     - [ ] POST /api/role/create
     - [ ] POST /api/role/delete
