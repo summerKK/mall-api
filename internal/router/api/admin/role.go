@@ -48,3 +48,20 @@ func (u umsRoleController) Create(c *gin.Context) {
 
 	response.Success(gin.H{})
 }
+
+func (u umsRoleController) AllocResource(c *gin.Context) {
+	params := &admin.RoleAllocResourceRequest{}
+	ok, response := u.VerifyParams(c, params)
+	if !ok {
+		return
+	}
+
+	svc := service.NewRoleService(c)
+	err := svc.AllocResource(params)
+	if err != nil {
+		response.Fail(error.NewErrWithBusinessError(err))
+		return
+	}
+
+	response.Success(gin.H{})
+}

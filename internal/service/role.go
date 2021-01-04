@@ -54,3 +54,24 @@ func (r *RoleService) Create(params *admin.RoleCreateRequest) (err error) {
 
 	return
 }
+
+func (r *RoleService) AllocResource(params *admin.RoleAllocResourceRequest) (err error) {
+	defer func() {
+		util.AddErrorToCtx(r.service.ctx, err)
+	}()
+
+	role := &model.UmsRole{}
+	ok, err := r.dao.GetItemById(params.RoleId, role)
+	if err != nil {
+		return
+	}
+
+	if !ok {
+		err = businessError.NewBusinessError("角色不存在")
+		return
+	}
+
+	err = r.dao.SyncRoleResource(params.RoleId, params.ResourceIds)
+
+	return
+}

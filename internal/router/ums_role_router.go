@@ -9,6 +9,8 @@ func UmsRoleRouter(r *gin.RouterGroup) {
 	r1 := r.Group("/role")
 	// 给角色分配菜单
 	r1.POST("allocMenu", admin.UmsRoleController.AllocMenu)
+	// 给角色分配资源
+	r1.POST("allocResource", admin.UmsRoleController.AllocResource)
 	// 添加角色
 	r1.POST("create", admin.UmsRoleController.Create)
 }

@@ -17,7 +17,7 @@ func NewRole(db *gorm.DB) *Role {
 
 func (r *Role) SyncRoleMenu(roleId uint, menuIds []uint) error {
 	// 删除原有的关系
-	err := r.db.Where("role_id = (?)", roleId).Delete(&model.UmsRoleMenuRelation{}).Error
+	err := r.db.Where("role_id = ? ", roleId).Delete(&model.UmsRoleMenuRelation{}).Error
 	if err != nil {
 		return err
 	}
@@ -31,6 +31,17 @@ func (r *Role) SyncRoleMenu(roleId uint, menuIds []uint) error {
 	return r.db.Create(relation).Error
 }
 
-func (r *Role) Create() {
+func (r *Role) SyncRoleResource(roleId uint, resourceIds []uint) error {
+	err := r.db.Where("role_id = ?", roleId).Delete(&model.UmsRoleResourceRelation{}).Error
+	if err != nil {
+		return err
+	}
 
+	relation := make([]model.UmsRoleResourceRelation, len(resourceIds))
+	for i, resourceId := range resourceIds {
+		relation[i].RoleId = roleId
+		relation[i].ResourceId = resourceId
+	}
+
+	return r.db.Create(relation).Error
 }

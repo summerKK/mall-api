@@ -23,3 +23,8 @@ func (r *RoleCreateRequest) Convert2Model() *model.UmsRole {
 		Status:      r.Status,
 	}
 }
+
+type RoleAllocResourceRequest struct {
+	ResourceIds []uint `json:"resourceIds" form:"resourceIds"`
+	RoleId      uint   `json:"roleId" form:"roleId"`
+}
