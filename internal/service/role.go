@@ -43,3 +43,14 @@ func (r *RoleService) AllocMenu(params *admin.RoleAllocMenuRequest) (err error) 
 
 	return
 }
+
+func (r *RoleService) Create(params *admin.RoleCreateRequest) (err error) {
+	defer func() {
+		util.AddErrorToCtx(r.service.ctx, err)
+	}()
+
+	role := params.Convert2Model()
+	err = r.dao.Insert(role)
+
+	return
+}

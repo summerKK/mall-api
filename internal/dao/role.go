@@ -30,3 +30,7 @@ func (r *Role) SyncRoleMenu(roleId uint, menuIds []uint) error {
 
 	return r.db.Create(relation).Error
 }
+
+func (r *Role) Create() {
+
+}
