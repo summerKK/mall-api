@@ -20,6 +20,8 @@ func NewRouter() *gin.Engine {
 		umsAdminRouter(r1)
 		// 商品管理
 		pmsProductRouter(r1)
+		// 后台用户角色管理
+		UmsRoleRouter(r1)
 	}
 
 	return r

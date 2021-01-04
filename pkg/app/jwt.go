@@ -9,7 +9,7 @@ import (
 
 // jwt token 验证实现
 type Claims struct {
-	UserId int `json:"userId"`
+	UserId uint `json:"userId"`
 	jwt.StandardClaims
 }
 
@@ -18,7 +18,7 @@ func GetJWTSecret() []byte {
 }
 
 //  生成 token
-func GenerateToken(userId int) (string, error) {
+func GenerateToken(userId uint) (string, error) {
 	nowTime := time.Now()
 	expireTime := nowTime.Add(global.JWTSetting.Expire * time.Second)
 	claims := Claims{

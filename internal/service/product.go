@@ -84,7 +84,7 @@ func (s *ProductService) Create(params *admin.ProductRequest) (product *model.Pm
 func (s *ProductService) Update(params *admin.ProductRequest, productId int) (product *model.PmsProduct, err error) {
 
 	// 查看商品是否存在
-	exists, err := s.dao.GetItemById(productId, &model.PmsProduct{})
+	exists, err := s.dao.GetItemById(uint(productId), &model.PmsProduct{})
 	if err != nil {
 		return nil, businessError.NewBusinessError("操作失败")
 	}

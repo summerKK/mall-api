@@ -18,7 +18,7 @@ func NewDao(db *gorm.DB) *Dao {
 	}
 }
 
-func (d *Dao) GetItemById(id int, model interface{}) (exists bool, err error) {
+func (d *Dao) GetItemById(id uint, model interface{}) (exists bool, err error) {
 	return d.GetItemByColumns(map[string]interface{}{"id": id}, model)
 }
 

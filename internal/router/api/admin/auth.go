@@ -30,7 +30,7 @@ func (u umsAdminController) Login(c *gin.Context) {
 		return
 	}
 
-	token, err := app.GenerateToken(int(user.Id))
+	token, err := app.GenerateToken(user.Id)
 	if err != nil {
 		response.Fail(error.UnauthorizedTokenGenerate)
 		return
@@ -62,7 +62,7 @@ func (u umsAdminController) Register(c *gin.Context) {
 // 获取指定用户信息
 func (_ umsAdminController) GetItem(c *gin.Context) {
 	p := c.Param("id")
-	userId := convert.StrTo(p).MustInt()
+	userId := convert.StrTo(p).MustUInt()
 	response := app.NewResponse(c)
 	if userId == 0 {
 		response.Fail(error.InvalidParams)

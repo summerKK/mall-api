@@ -19,6 +19,8 @@ type UmsRole struct {
 	Sort   uint  `json:"sort" gorm:"default:0"`
 	// 创建时间
 	CreateTime LocalTime `json:"createTime"`
+
+	Menus []*UmsMenu `gorm:"many2many:ums_role_menu_relation;joinforeignKey:role_id;joinReferences:menu_id"`
 }
 
 func (r *UmsRole) TableName() string {

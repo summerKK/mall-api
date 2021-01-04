@@ -76,7 +76,7 @@ func (s *AdminService) Register(param *admin.UserRegisterRequest) (user *model.U
 }
 
 // 获取指定用户信息
-func (s *AdminService) GetItem(userId int) (user *model.UmsAdmin, err error) {
+func (s *AdminService) GetItem(userId uint) (user *model.UmsAdmin, err error) {
 	defer func() {
 		util.AddErrorToCtx(s.service.ctx, err)
 	}()

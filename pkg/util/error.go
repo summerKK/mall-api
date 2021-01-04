@@ -13,13 +13,13 @@ func AddErrorToCtx(ctx *gin.Context, err error) {
 		return
 	}
 
+	// 业务的错误不用加到里面去
+	if _, ok := err.(*businessError.BusinessError); ok {
+		return
+	}
+
 	value, exists := ctx.Get(GetCtxErrorKey())
 	if exists {
-		// 业务的错误不用加到里面去
-		if _, ok := err.(*businessError.BusinessError); ok {
-			return
-		}
-
 		if errList, ok := value.(*[]error); ok {
 			stack := Stack(2)
 			err = errors.New(err.Error() + "\n\n" + stack)
